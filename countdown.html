@@ -3,304 +3,544 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Countdown Menuju PNS | CPNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+  <title>Countdown Menuju PNS | CPNS Pemkot Makassar 2024</title>
+
   <link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png">
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet"/>
 
   <style>
-    :root {
-      --primary: #0d6efd;
-      --dark-blue: #0a1f44;
-      --light-blue: #00d4ff;
-      --glow: rgba(0,212,255,0.6);
+    :root{
+  --gold:#d4af37;
+  --gold-soft:#f5df9b;
+
+  --dark:#020817;
+  --dark-2:#061224;
+  --dark-3:#0b1d39;
+
+  --blue:#5ccfff;
+
+  --white-soft:rgba(255,255,255,0.82);
+
+  --glass:rgba(8,18,38,0.55);
+  --border:rgba(255,255,255,0.08);
+}
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    body{
+  min-height:100vh;
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+
+  background:
+    radial-gradient(circle at top left,
+      rgba(92,207,255,0.08),
+      transparent 28%
+    ),
+
+    radial-gradient(circle at bottom right,
+      rgba(212,175,55,0.06),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      135deg,
+      #01050f 0%,
+      #020817 25%,
+      #061224 60%,
+      #0a1830 100%
+    );
+
+  color:white;
+  position:relative;
+}
+    /* Aura */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(212,175,55,0.10), transparent 35%),
+        radial-gradient(circle at 80% 70%, rgba(76,201,240,0.08), transparent 30%);
+      animation:aura 10s ease-in-out infinite alternate;
+      pointer-events:none;
     }
 
-    body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      background-attachment: fixed;
-      font-family: 'Inter', sans-serif;
-      color: white;
-      overflow-x: hidden;
-      position: relative;
+    @keyframes aura{
+      from{
+        transform:scale(1);
+        opacity:.7;
+      }
+      to{
+        transform:scale(1.08);
+        opacity:1;
+      }
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 20% 30%, rgba(0,212,255,0.15) 0%, transparent 45%);
-      pointer-events: none;
-      z-index: 1;
+    /* Noise layer */
+    .noise{
+      position:fixed;
+      inset:0;
+      opacity:.05;
+      background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+      mix-blend-mode:soft-light;
+      pointer-events:none;
     }
 
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(10, 31, 68, 0.48);
-      backdrop-filter: blur(9px);
-      z-index: 2;
+    .container-main{
+      position:relative;
+      z-index:5;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:30px 20px;
     }
 
-    .content {
-      position: relative;
-      z-index: 5;
-      padding: 2rem 1rem;
+   .glass-card{
+  width:100%;
+  max-width:1200px;
+  padding:60px 50px;
+  border-radius:34px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(10,22,45,0.82),
+      rgba(4,10,22,0.88)
+    );
+
+  border:1px solid rgba(255,255,255,0.06);
+
+  backdrop-filter:blur(22px);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.02),
+    0 40px 120px rgba(0,0,0,0.75),
+    0 0 80px rgba(0,40,120,0.25);
+
+  position:relative;
+  overflow:hidden;
+}
+
+    .glass-card::before{
+      content:"";
+      position:absolute;
+      top:-120px;
+      right:-120px;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(212,175,55,0.20), transparent 70%);
     }
 
-    .header {
-      text-align: center;
-      padding: 3.5rem 1rem 2rem;
+    .glass-card::after{
+      content:"";
+      position:absolute;
+      bottom:-140px;
+      left:-100px;
+      width:260px;
+      height:260px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(76,201,240,0.15), transparent 70%);
     }
 
-    .title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.8rem, 8vw, 6rem);
-      font-weight: 700;
-      background: linear-gradient(90deg, #00d4ff, #ffffff, #00d4ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% auto;
-      animation: shine 7s linear infinite;
-      text-shadow: 0 0 35px var(--glow);
+    .top-text{
+      text-align:center;
+      margin-bottom:15px;
+      letter-spacing:5px;
+      text-transform:uppercase;
+      color:rgba(255,255,255,0.55);
+      font-size:.9rem;
+      font-weight:500;
     }
 
-    @keyframes shine {
-      0%,100% { background-position: 0% center; }
-      50%     { background-position: 200% center; }
+   .title{
+  text-align:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.8rem,8vw,7rem);
+  font-weight:700;
+  line-height:1;
+  margin-bottom:15px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #dcecff 35%,
+      #8fbfff 70%,
+      #d4af37 100%
+    );
+
+  -webkit-background-clip:text;
+  color:transparent;
+
+  text-shadow:
+    0 0 35px rgba(92,207,255,0.12),
+    0 0 70px rgba(92,207,255,0.08);
+}
+    .subtitle{
+      text-align:center;
+      color:var(--white-soft);
+      font-size:1.1rem;
+      letter-spacing:2px;
+      margin-bottom:55px;
     }
 
-    .subtitle {
-      font-size: 1.35rem;
-      opacity: 0.92;
-      margin-top: 0.9rem;
-      letter-spacing: 1.8px;
+    .countdown{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+      gap:22px;
+      margin-bottom:55px;
     }
 
-    .countdown-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.4rem 2.2rem;
-      margin: 3.5rem auto;
-      max-width: 1100px;
+    .box{
+      position:relative;
+      padding:35px 20px;
+      border-radius:28px;
+      background:linear-gradient(
+        180deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.03)
+      );
+      border:1px solid rgba(255,255,255,0.10);
+      text-align:center;
+      overflow:hidden;
+      transition:.45s ease;
     }
 
-    .countdown-box {
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 18px;
-      padding: 1.8rem 2.6rem;
-      min-width: 150px;
-      text-align: center;
-      transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    .box::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        135deg,
+        rgba(255,255,255,0.08),
+        transparent 40%
+      );
     }
 
-    .countdown-box:hover {
-      transform: translateY(-15px) scale(1.06);
-      box-shadow: 0 25px 70px rgba(0,212,255,0.3);
-      border-color: var(--light-blue);
+    .box:hover{
+      transform:translateY(-10px);
+      border-color:rgba(212,175,55,0.35);
+      box-shadow:
+        0 20px 45px rgba(0,0,0,0.45),
+        0 0 40px rgba(212,175,55,0.08);
     }
 
-    .number {
-      font-size: clamp(3rem, 9vw, 5.5rem);
-      font-weight: 700;
-      line-height: 1;
-      color: var(--light-blue);
-      text-shadow: 0 0 30px var(--glow);
+    .number{
+      font-size:clamp(3rem,7vw,5.5rem);
+      font-weight:800;
+      line-height:1;
+      margin-bottom:10px;
+      background:linear-gradient(180deg,#ffffff,#9fe8ff);
+      -webkit-background-clip:text;
+      color:transparent;
+      text-shadow:0 0 25px rgba(76,201,240,0.18);
     }
 
-    .label {
-      font-size: 1.15rem;
-      margin-top: 0.7rem;
-      opacity: 0.88;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
+    .label{
+      font-size:.95rem;
+      text-transform:uppercase;
+      letter-spacing:3px;
+      color:rgba(255,255,255,0.60);
     }
 
-    .motivation {
-      text-align: center;
-      margin: 3.5rem auto;
-      max-width: 760px;
-      font-size: 1.35rem;
-      font-weight: 300;
-      line-height: 1.75;
-      opacity: 0.92;
+    .quote{
+      max-width:820px;
+      margin:0 auto 45px;
+      text-align:center;
+      font-size:1.18rem;
+      line-height:2;
+      color:rgba(255,255,255,0.78);
+      font-weight:300;
     }
 
-    .progress-container {
-      max-width: 760px;
-      margin: 4.5rem auto 2.5rem;
+    .quote strong{
+      color:var(--gold-soft);
+      font-weight:600;
     }
 
-    .progress {
-      height: 14px;
-      background: rgba(255,255,255,0.07);
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.45);
+    .progress-wrapper{
+      max-width:800px;
+      margin:auto;
     }
 
-    .progress-bar {
-      background: linear-gradient(90deg, #00d4ff, #007bff, #00d4ff);
-      background-size: 200% auto;
-      animation: progressFlow 6s linear infinite;
-      height: 100%;
-      width: 0%;
-      transition: width 1.8s ease-out;
-      box-shadow: 0 0 25px rgba(0,212,255,0.75);
+    .progress{
+      height:12px;
+      border-radius:50px;
+      overflow:hidden;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.08);
     }
 
-    @keyframes progressFlow {
-      0%   { background-position: 0% center; }
-      100% { background-position: 200% center; }
+    .progress-bar{
+      width:0%;
+      border-radius:50px;
+      background:linear-gradient(
+        90deg,
+        #d4af37,
+        #f3d98b,
+        #4cc9f0
+      );
+      box-shadow:
+        0 0 25px rgba(212,175,55,0.4);
+      transition:1s ease;
     }
 
-    /* Partikel lebih halus & sedikit lebih banyak */
-    .particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 3;
+    .percent{
+      text-align:center;
+      margin-top:18px;
+      color:rgba(255,255,255,0.68);
+      letter-spacing:1px;
+      font-size:.95rem;
     }
 
-    .particle {
-      position: absolute;
-      background: rgba(0,212,255,0.75);
-      border-radius: 50%;
-      pointer-events: none;
-      animation: float 28s infinite linear;
-      opacity: 0;
+    /* Floating lights */
+    .particles{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:1;
     }
 
-    @keyframes float {
-      0%   { transform: translateY(110vh) scale(0.15); opacity: 0; }
-      8%   { opacity: 0.8; }
-      92%  { opacity: 0.8; }
-      100% { transform: translateY(-25vh) scale(0.25); opacity: 0; }
+    .particle{
+      position:absolute;
+      width:3px;
+      height:3px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.8);
+      box-shadow:0 0 15px rgba(255,255,255,0.7);
+      animation:float linear infinite;
     }
+
+    @keyframes float{
+      from{
+        transform:translateY(110vh) scale(.3);
+        opacity:0;
+      }
+      10%{
+        opacity:1;
+      }
+      90%{
+        opacity:1;
+      }
+      to{
+        transform:translateY(-20vh) scale(1);
+        opacity:0;
+      }
+    }
+
+    @media(max-width:768px){
+
+      body{
+        overflow:auto;
+      }
+
+      .glass-card{
+        padding:45px 24px;
+      }
+
+      .title{
+        font-size:4rem;
+      }
+
+      .quote{
+        font-size:1rem;
+        line-height:1.8;
+      }
+
+      .subtitle{
+        font-size:.95rem;
+      }
+
+    }
+
   </style>
 </head>
+
 <body>
 
-<div class="overlay"></div>
+<div class="noise"></div>
 
-<!-- Partikel background -->
 <div class="particles" id="particles"></div>
 
-<div class="content">
+<div class="container-main">
 
-  <div class="header animate__animated animate__fadeInDown">
-    <h1 class="title">PNS LOADING...</h1>
-    <p class="subtitle">1 JUNI 2026 • Menuju Status Pegawai Negeri Sipil</p>
-  </div>
+  <div class="glass-card">
 
-  <div class="countdown-container animate__animated animate__zoomIn animate__delay-1s">
-    <div class="countdown-box">
-      <div class="number" id="days">0</div>
-      <div class="label">Hari</div>
-    </div>
-    <div class="countdown-box">
-      <div class="number" id="hours">00</div>
-      <div class="label">Jam</div>
-    </div>
-    <div class="countdown-box">
-      <div class="number" id="minutes">00</div>
-      <div class="label">Menit</div>
-    </div>
-    <div class="countdown-box">
-      <div class="number" id="seconds">00</div>
-      <div class="label">Detik</div>
-    </div>
-  </div>
+   <div class="top-text">
+  Menuju Babak Baru
+</div>
 
-  <div class="motivation animate__animated animate__fadeInUp animate__delay-1s">
-    "Semua usaha keras, tangis diam-diam, dan doa di sepertiga malam<br>
-    sedang menuju titik temu di hari itu.<br>
-    <strong>Tinggal sedikit lagi... bertahan ya, calon PNS! 💙✨</strong>"
-  </div>
+<h1 class="title">
+  PNS 100%
+</h1>
 
-  <div class="progress-container animate__animated animate__fadeIn animate__delay-2s">
-    <div class="progress">
-      <div class="progress-bar" id="progressBar" role="progressbar"></div>
+<div class="subtitle">
+  01 JUNI 2026 • PENGANGKATAN RESMI PEGAWAI NEGERI SIPIL
+</div>
+
+    <div class="countdown">
+
+      <div class="box">
+        <div class="number" id="days">0</div>
+        <div class="label">Hari</div>
+      </div>
+
+      <div class="box">
+        <div class="number" id="hours">00</div>
+        <div class="label">Jam</div>
+      </div>
+
+      <div class="box">
+        <div class="number" id="minutes">00</div>
+        <div class="label">Menit</div>
+      </div>
+
+      <div class="box">
+        <div class="number" id="seconds">00</div>
+        <div class="label">Detik</div>
+      </div>
+
     </div>
-    <p class="text-center mt-3 fs-5 opacity-85" id="percentText">0% (1 Juni 2025 – 1 Juni 2026)</p>
+
+    <div class="quote">
+  “Tak semua perjuangan hadir dengan riuh.<br>
+  Banyak yang tumbuh diam-diam dalam rapalan doa, tabah dalam lelah,<br>
+  hingga tiba saatnya untuk menuai dengan anggun.”
+  <br><br>
+  <strong>Dan waktu itu sedang berjalan menuju kemari.</strong>
+</div>
+
+    <div class="progress-wrapper">
+
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="percent" id="percentText">
+        0% • 1 Juni 2025 — 1 Juni 2026
+      </div>
+
+    </div>
+
   </div>
 
 </div>
 
 <script>
-// Tanggal target & start periode perhitungan progress
-const startDate   = new Date("2025-06-01T00:00:00").getTime();
-const targetDate  = new Date("2026-06-01T00:00:00").getTime();
 
-function updateCountdown() {
+const startDate  = new Date("2025-06-01T00:00:00").getTime();
+const targetDate = new Date("2026-06-01T00:00:00").getTime();
+
+function updateCountdown(){
+
   const now = new Date().getTime();
   const distance = targetDate - now;
 
-  if (distance <= 0) {
+  if(distance <= 0){
+
     document.getElementById("days").innerText = "0";
     document.getElementById("hours").innerText = "00";
     document.getElementById("minutes").innerText = "00";
     document.getElementById("seconds").innerText = "00";
-    document.getElementById("percentText").innerText = "SELAMAT! Anda sudah resmi PNS! 🎉";
+
     document.getElementById("progressBar").style.width = "100%";
+
+    document.getElementById("percentText").innerHTML =
+      "SELAMAT • ANDA RESMI MENJADI PNS";
+
     return;
   }
 
-  const days    = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+  const hours = Math.floor(
+    (distance % (1000 * 60 * 60 * 24))
+    / (1000 * 60 * 60)
+  );
+
+  const minutes = Math.floor(
+    (distance % (1000 * 60 * 60))
+    / (1000 * 60)
+  );
+
+  const seconds = Math.floor(
+    (distance % (1000 * 60))
+    / 1000
+  );
 
   document.getElementById("days").innerText = days;
-  document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
-  document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
-  document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
 
-  // Progress dari 1 Juni 2025 sampai 1 Juni 2026
+  document.getElementById("hours").innerText =
+    hours.toString().padStart(2,'0');
+
+  document.getElementById("minutes").innerText =
+    minutes.toString().padStart(2,'0');
+
+  document.getElementById("seconds").innerText =
+    seconds.toString().padStart(2,'0');
+
   const totalMs = targetDate - startDate;
   const elapsedMs = Math.max(0, now - startDate);
-  const progress = Math.min(100, (elapsedMs / totalMs) * 100);
 
-  document.getElementById("progressBar").style.width = progress + "%";
-  document.getElementById("percentText").innerText = 
-    Math.floor(progress) + `% (1 Juni 2025 – 1 Juni 2026)`;
+  const progress = Math.min(
+    100,
+    (elapsedMs / totalMs) * 100
+  );
+
+  document.getElementById("progressBar").style.width =
+    progress + "%";
+
+  document.getElementById("percentText").innerHTML =
+    Math.floor(progress) + "% • 1 Juni 2025 — 1 Juni 2026";
+
 }
 
-// Buat partikel mengambang
-function createParticles() {
+function createParticles(){
+
   const container = document.getElementById("particles");
-  for(let i = 0; i < 30; i++) {
+
+  for(let i=0; i<45; i++){
+
     const p = document.createElement("div");
+
     p.className = "particle";
-    p.style.width = `${Math.random() * 5 + 1.5}px`;
-    p.style.height = p.style.width;
-    p.style.left = `${Math.random() * 100}vw`;
-    p.style.animationDelay = `${Math.random() * 25}s`;
-    p.style.animationDuration = `${18 + Math.random() * 30}s`;
+
+    const size = Math.random() * 3 + 1;
+
+    p.style.width = size + "px";
+    p.style.height = size + "px";
+
+    p.style.left = Math.random() * 100 + "vw";
+
+    p.style.animationDuration =
+      (15 + Math.random() * 25) + "s";
+
+    p.style.animationDelay =
+      Math.random() * 20 + "s";
+
     container.appendChild(p);
+
   }
+
 }
 
 createParticles();
 updateCountdown();
-setInterval(updateCountdown, 1000);
+
+setInterval(updateCountdown,1000);
+
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
