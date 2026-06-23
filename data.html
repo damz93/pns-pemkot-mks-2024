@@ -15,228 +15,230 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
         :root {
-            --punk-pink: #ff007f;
-            --punk-cyan: #00f0ff;
-            --punk-purple: #9d00ff;
-            --punk-yellow: #ffea00;
-            --punk-dark: #110e15;
+            --primary: #3B82F6;
+            --primary-dark: #2563EB;
+            --secondary: #60A5FA;
+            --accent: #93C5FD;
+            --background: #F8FAFC;
+            --card: #FFFFFF;
+            --text: #1E293B;
+            --text-soft: #64748B;
+            --border: #E2E8F0;
         }
 
         body {
-            background: url('https://images.unsplash.com/photo-1643022040583-b4be6de7fbf6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3') no-repeat center center/cover;
-            background-attachment: fixed;
+            background-color: var(--background);
             min-height: 100vh;
             margin: 0;
-            padding-bottom: 100px;
-            font-family: 'Montserrat', sans-serif;
-            color: white;
-            overflow-x: hidden;
-            background-color: var(--punk-dark);
+            padding-bottom: 80px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text);
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(17,14,21,0.4) 0%, rgba(17,14,21,0.85) 100%);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            z-index: -2;
-        }
-
-        /* Manga Panel Overlay Texture */
-        .bg-manga-texture {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.08;
-            background-image: linear-gradient(45deg, #000 25%, transparent 25%), linear-gradient(-45deg, #000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(-45deg, transparent 75%, #000 75%);
-            background-size: 20px 20px;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        /* HEADER POP PUNK BANNER */
-        .header-section {
-            background: var(--punk-dark);
-            border-bottom: 4px solid var(--punk-pink);
-            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.3);
+        /* MAIN CONTAINER CARD */
+        .main-container {
             width: 100%;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 0;
+            max-width: 1200px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            padding: 30px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* NEO GOV HEADER */
+        .header-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 25px;
             margin-bottom: 30px;
         }
 
-        .header-section h2 {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 2.3rem;
-            margin: 0;
-            color: #fff;
-            text-shadow: 3px 3px var(--punk-cyan);
-            letter-spacing: 2px;
-        }
-
-        .header-section p {
-            font-weight: 800;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            margin: 5px 0 0;
-            color: var(--punk-yellow);
-            letter-spacing: 1px;
-        }
-
-        .logo-container img {
-            height: 55px;
+        .logo-box img {
+            height: 65px;
             width: auto;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.2s ease;
         }
-        .logo-container:hover img {
-            transform: scale(1.15) rotate(-8deg);
+
+        .logo-box:hover img {
+            transform: scale(1.05);
+        }
+
+        .title-box h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0;
+            letter-spacing: -0.5px;
+        }
+
+        .title-box p {
+            font-size: 0.95rem;
+            color: var(--text-soft);
+            margin: 4px 0 0;
+            font-weight: 500;
         }
 
         .no-style {
             background: transparent;
             color: inherit;
             text-decoration: none;
-            display: inline-block;
         }
 
-        /* CONTAINER BOX DESIGN */
-        .punk-container {
-            background: rgba(17, 14, 21, 0.9);
-            border: 3px dashed var(--punk-purple);
-            border-radius: 0px;
-            padding: 25px;
-            box-shadow: 0 0 20px rgba(157, 0, 255, 0.2);
-            width: 100%;
-            max-width: 1200px;
-            margin-bottom: 80px;
-        }
-
-        /* OVERRIDE DATATABLES & TABLE LOOK */
+        /* DATA TABLE RESPONSIVE LAYOUT */
         .table-responsive {
-            border-radius: 0px;
-            border: 2px solid #fff;
-            box-shadow: 6px 6px 0px rgba(255, 255, 255, 0.15);
-            background: #1c1724;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: var(--card);
             padding: 15px;
         }
 
         table.dataTable {
-            background: #1c1724 !important;
-            color: #fff !important;
+            background: var(--card) !important;
+            color: var(--text) !important;
             border-collapse: collapse !important;
+            width: 100% !important;
+            margin-bottom: 15px !important;
         }
 
         table.dataTable thead th {
-            background: var(--punk-purple) !important;
-            color: var(--punk-yellow) !important;
-            font-weight: 800;
+            background: var(--background) !important;
+            color: var(--text) !important;
+            font-weight: 700;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            border-bottom: 3px solid #fff !important;
-            padding: 12px !important;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border) !important;
+            padding: 14px 10px !important;
         }
 
         table.dataTable tbody td {
-            padding: 12px !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-            background: transparent !important;
+            padding: 14px 10px !important;
+            border-bottom: 1px solid var(--border) !important;
+            font-size: 0.95rem;
+            vertical-align: middle;
         }
 
         table.dataTable tbody tr:hover td {
-            background: rgba(255, 0, 127, 0.15) !important;
-            color: var(--punk-cyan) !important;
+            background: rgba(59, 130, 246, 0.04) !important;
         }
 
-        /* Customizing DataTables elements (Search, Pagination) */
+        /* DATATABLES DESIGN EXTENSIONS */
         .dataTables_wrapper .dataTables_filter input {
-            background: var(--punk-dark) !important;
-            border: 2px solid var(--punk-cyan) !important;
-            color: white !important;
-            border-radius: 0px !important;
-            padding: 6px 10px !important;
-            font-weight: 600;
-            box-shadow: 3px 3px 0px var(--punk-pink);
+            background: var(--background) !important;
+            border: 1px solid var(--border) !important;
+            color: var(--text) !important;
+            border-radius: 8px !important;
+            padding: 8px 14px !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.2s ease;
+            margin-left: 10px !important;
+        }
+
+        .dataTables_wrapper .dataTables_filter input:focus {
+            border-color: var(--primary) !important;
+            background: var(--card) !important;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
         }
 
         .dataTables_wrapper .dataTables_length select {
-            background: var(--punk-dark) !important;
-            border: 2px solid var(--punk-purple) !important;
-            color: white !important;
-            border-radius: 0px !important;
+            background: var(--background) !important;
+            border: 1px solid var(--border) !important;
+            border-radius: 8px !important;
+            padding: 6px 30px 6px 12px !important;
+            color: var(--text) !important;
+            font-weight: 500;
         }
 
-        .dataTables_wrapper .dataTables_info, 
+        .dataTables_wrapper .dataTables_info {
+            color: var(--text-soft) !important;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+
         .dataTables_wrapper .dataTables_paginate {
-            color: #fff !important;
-            margin-top: 15px;
+            padding-top: 0px !important;
         }
 
         .dataTables_wrapper .dataTables_paginate .paginate_button {
-            background: var(--punk-dark) !important;
-            border: 1px solid #fff !important;
-            color: white !important;
-            border-radius: 0px !important;
+            background: var(--card) !important;
+            border: 1px solid var(--border) !important;
+            color: var(--text) !important;
+            border-radius: 8px !important;
+            padding: 6px 12px !important;
+            margin: 0 3px !important;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
         }
 
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-            background: var(--punk-pink) !important;
-            color: white !important;
-            border-color: var(--punk-pink) !important;
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: var(--background) !important;
+            border-color: var(--border) !important;
+            color: var(--text) !important;
         }
 
-        /* WIDGET SAWERIA STICKER */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+            background: var(--primary) !important;
+            color: white !important;
+            border-color: var(--primary) !important;
+            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+        }
+
+        /* MINIMALIST FLOATING SAWERIA WIDGET */
         #saweria-widget {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background: #fff;
-            border: 2px solid var(--punk-pink);
-            padding: 6px 14px;
-            border-radius: 0px;
-            box-shadow: 4px 4px 0px var(--punk-dark);
+            bottom: 25px;
+            left: 25px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             z-index: 9999;
             transition: all 0.2s ease;
-            transform: rotate(-2deg);
         }
 
         #saweria-widget:hover {
-            transform: scale(1.05) rotate(0deg);
-            box-shadow: 2px 2px 0px var(--punk-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
         }
 
         #saweria-widget img {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             object-fit: cover;
             border-radius: 50%;
-            border: 2px solid var(--punk-pink);
-            background: #000;
         }
 
         #saweria-widget span {
-            margin-left: 6px;
+            margin-left: 8px;
             font-size: 0.85rem;
-            color: #000;
-            font-weight: 800;
-            text-transform: uppercase;
+            color: var(--text);
+            font-weight: 600;
         }
 
-        /* POPUP PERSETUJUAN */
+        /* COMPACT INTEGRITY MODAL */
         .popup-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(17, 14, 21, 0.7);
-            backdrop-filter: blur(5px);
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -244,149 +246,160 @@
         }
 
         .popup-box {
-            background: var(--punk-dark);
-            border: 4px solid var(--punk-purple);
-            border-radius: 0px;
-            padding: 25px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 30px;
             width: 440px;
             max-width: 90%;
             text-align: center;
-            box-shadow: 10px 10px 0px var(--punk-pink);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
         .popup-box h2 {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 1.8rem;
-            color: var(--punk-cyan);
-            text-shadow: 2px 2px #000;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 10px;
         }
 
         .popup-box p {
-            font-weight: 600;
             font-size: 0.9rem;
+            color: var(--text-soft);
+            line-height: 1.5;
         }
 
         .popup-box ul {
             text-align: left;
             font-size: 0.85rem;
-            color: #e0e0e0;
-            margin-bottom: 25px;
-            padding-left: 15px;
+            color: var(--text);
+            margin: 20px 0 25px;
+            padding-left: 20px;
         }
 
         .popup-box ul li {
             margin-bottom: 8px;
-            list-style-type: square;
+            line-height: 1.4;
         }
 
-        /* BUTTONS STICKER STYLE */
+        /* BUTTON CONTROLS */
         .btn-success {
-            background: var(--punk-yellow);
-            color: #000 !important;
-            border: 2px solid #000;
-            border-radius: 0px;
-            font-weight: 800;
-            text-transform: uppercase;
-            box-shadow: 4px 4px 0px #000;
+            background: var(--primary);
+            color: #fff !important;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 20px;
             transition: all 0.2s ease;
         }
 
         .btn-success:hover {
-            background: #fff;
-            box-shadow: 2px 2px 0px #000;
-            transform: translate(2px, 2px);
+            background: var(--primary-dark);
         }
 
         .btn-danger {
-            background: var(--punk-pink);
-            color: #fff !important;
-            border: 2px solid #fff;
-            border-radius: 0px;
-            font-weight: 800;
-            text-transform: uppercase;
-            box-shadow: 4px 4px 0px #000;
+            background: var(--background);
+            color: var(--text-soft) !important;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 18px;
             transition: all 0.2s ease;
         }
 
         .btn-danger:hover {
-            background: #ff409f;
-            box-shadow: 2px 2px 0px #000;
-            transform: translate(2px, 2px);
+            background: var(--border);
+            color: var(--text) !important;
         }
 
         .hidden { display: none !important; }
 
-        @media (max-width: 576px) {
-            .header-section h2 { font-size: 1.6rem; }
-            #saweria-widget { bottom: 20px; left: 10px; }
+        @media (max-width: 768px) {
+            .header-area {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-box h2 { font-size: 1.35rem; }
+            .main-container { padding: 15px; margin-top: 20px; }
+            .dataTables_wrapper .d-flex {
+                flex-direction: column !important;
+                gap: 12px;
+                align-items: flex-start !important;
+            }
+            .dataTables_wrapper .dataTables_filter input {
+                margin-left: 0 !important;
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Manga Pattern Effect -->
-    <div class="bg-manga-texture"></div>
-
-    <!-- Floating Saweria Widget -->
+    <!-- Minimalist Floating Widget -->
     <div id="saweria-widget">
         <a href="https://saweria.co/damz93" target="_blank" style="text-decoration: none;">
             <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" />
-            <span>Recehan Kak 💖</span>
+            <span>Dukung Pengembang</span>
         </a>
     </div>
 
-    <!-- Persetujuan Popup -->
+    <!-- Integrity Agreement Popup -->
     <div class="popup-container" id="popup">
-        <div class="popup-box animate__animated animate__zoomIn">
-            <h2>~ PERSETUJUAN ~</h2>
-            <p>Dengan mengakses halaman ini, Anda menyetujui dan berkomitmen untuk:</p>
+        <div class="popup-box animate__animated animate__fadeInUp">
+            <h2>Komitmen Integritas Data</h2>
+            <p>Untuk mengakses sistem informasi ini, Anda berkewajiban menyetujui pakta integritas penggunaan data berikut:</p>
             <ul>
-                <li>Menggunakan informasi yang tersedia secara bertanggung jawab.</li>
-                <li>Tidak membagikan atau menyebarluaskan data kepada pihak yang tidak berwenang.</li>
-                <li>Memanfaatkan akses ini hanya untuk keperluan yang sah.</li>
-                <li>Menjaga kerahasiaan informasi dan tidak menyalahgunakannya.</li>
-                <li>Tidak mengubah, memanipulasi, atau menyalahgunakan data.</li>
-                <li>Mematuhi ketentuan hukum dan kebijakan yang berlaku.</li>
+                <li>Menggunakan informasi data PNS secara bijak dan bertanggung jawab.</li>
+                <li>Tidak menyebarluaskan data pribadi kepada pihak ketiga yang tidak berwenang.</li>
+                <li>Memanfaatkan hak akses ini murni demi kebutuhan kedinasan yang sah.</li>
+                <li>Menjaga kerahasiaan kredensial dan tidak memanipulasi basis data sistem.</li>
+                <li>Mematuhui UU ITE serta regulasi perlindungan data yang berlaku di Indonesia.</li>
             </ul>
             <div class="d-flex justify-content-center gap-3">
-                <button class="btn btn-success px-4" id="agreeBtn">Saya Setuju</button>
-                <button class="btn btn-danger px-3" id="disagreeBtn">Tidak Setuju</button>
+                <button class="btn btn-success" id="agreeBtn">Saya Setuju</button>
+                <button class="btn btn-danger" id="disagreeBtn">Kembali</button>
             </div>
         </div>
     </div>
 
-    <!-- Header Banner -->
-    <div class="header-section">
-        <div class="logo-container mb-1">
-            <a href="../pns-pemkot-mks-2024" class="no-style">
-                <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo">
-            </a>
+    <!-- Main Container -->
+    <div class="container main-container animate__animated animate__fadeIn">
+        
+        <!-- Header Section -->
+        <div class="header-area">
+            <div class="logo-box">
+                <a href="../pns-pemkot-mks-2024" class="no-style">
+                    <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo">
+                </a>
+            </div>
+            <div class="title-box">
+                <h2>DATA PNS 2024</h2>
+                <p>Sistem Informasi Data Pegawai Negeri Sipil Pemerintah Kota Makassar</p>
+            </div>
         </div>
-        <h2>DATA PNS 2024</h2>
-        <p>Pemerintah Kota Makassar</p>
-    </div>
 
-    <!-- Main Container App Box -->
-    <div class="container punk-container animate__animated animate__fadeIn">
+        <!-- Data Table Area -->
         <div class="table-responsive">
-            <table id="dataTable" class="table table-striped table-hover table-bordered">
+            <table id="dataTable" class="table table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">No</th>
-                        <th>Nama</th>
-                        <th>Phone</th>
-                        <th class="text-center">Email</th>
+                        <th class="text-center" style="width: 50px;">No</th>
+                        <th>Nama Lengkap</th>
+                        <th>No. Kontak</th>
+                        <th class="text-center">E-Mail Resmi</th>
                         <th>Satuan Kerja</th>
-                        <th>Jabatan</th>
+                        <th>Jabatan Kerja</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
         </div>
+
     </div>
 
-    <!-- Logic Engine Script -->
+    <!-- Application Script Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const agreeBtn = document.getElementById('agreeBtn');
@@ -417,46 +430,54 @@
                     formattedData.forEach((row, index)=>{
                         $("#dataTable tbody").append(`
                             <tr>
-                                <td class='text-center'>${index+1}</td>
-                                <td style="font-weight:700;">${row.nama.toUpperCase()}</td>
-                                <td>${row.phone}</td>
+                                <td class='text-center' style="color: var(--text-soft); font-weight: 500;">${index+1}</td>
+                                <td style="font-weight:600; color:var(--text);">${row.nama.toUpperCase()}</td>
+                                <td style="font-weight:500; color:var(--text-soft);">${row.phone}</td>
                                 <td style='text-align:center'>
                                     <span class="email-container" data-email="${row.email.toLowerCase()}">
-                                        <i class="fa fa-eye toggle-email" style="cursor:pointer; color:var(--punk-cyan); font-size:1.1rem;"></i>
+                                        <i class="fa-regular fa-eye toggle-email" style="cursor:pointer; color:var(--primary); font-size:1rem;"></i>
                                     </span>
                                 </td>
-                                <td>${row.satuanKerja}</td>
-                                <td>${row.jabatan}</td>
+                                <td style="font-weight:500; color:var(--text-soft);">${row.satuanKerja}</td>
+                                <td style="font-weight:500; color:var(--text-soft);">${row.jabatan}</td>
                             </tr>
                         `);
                     });
 
-                    // Inisialisasi DataTable
+                    // Inisialisasi DataTable Premium & Clean Look
                     let table = $('#dataTable').DataTable({ 
                         pageLength: 10,
+                        dom: '<"d-flex justify-content-between align-items-center mb-3"l f>rt<"d-flex justify-content-between align-items-center mt-3"i p>',
                         language: {
-                            search: "CARI DATA:",
-                            lengthMenu: "TAMPIL _MENU_ BARIS",
-                            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ PNS",
+                            search: "",
+                            searchPlaceholder: "Cari data pegawai...",
+                            lengthMenu: "Tampilkan _MENU_ baris",
+                            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data PNS",
                             paginate: {
-                                first: "First",
-                                last: "Last",
-                                next: "⏩",
-                                previous: "⏪"
+                                next: "<i class='fa fa-chevron-right'></i>",
+                                previous: "<i class='fa fa-chevron-left'></i>"
                             }
                         }
                     });
 
-                    // Handler Toggle Email Pop Punk Look
-                    $(document).on("click",".toggle-email",function(){
-                        let $t=$(this);
-                        let emailContainer=$t.closest(".email-container");
-                        let email=emailContainer.attr("data-email");
+                    // Handler Minimalist Toggle Email
+                    $(document).on("click", ".toggle-email", function(){
+                        let $t = $(this);
+                        let emailContainer = $t.closest(".email-container");
+                        let email = emailContainer.attr("data-email");
+                        
                         if($t.hasClass("fa-eye-slash")){
-                            emailContainer.html('<i class="fa fa-eye toggle-email" style="cursor:pointer; color:var(--punk-cyan); font-size:1.1rem;"></i>');
+                            emailContainer.html('<i class="fa-regular fa-eye toggle-email" style="cursor:pointer; color:var(--primary); font-size:1rem;"></i>');
                         } else {
-                            $(".email-container").html('<i class="fa fa-eye toggle-email" style="cursor:pointer; color:var(--punk-cyan); font-size:1.1rem;"></i>');
-                            emailContainer.html(`<span style="color:var(--punk-yellow); font-weight:600; font-size:0.9rem; margin-right:8px;">${email}</span><i class="fa fa-eye-slash toggle-email" style="cursor:pointer; color:var(--punk-pink); font-size:1.1rem;"></i>`);
+                            // Reset state email lain yang sedang terbuka agar tetap rapi
+                            $(".email-container").each(function() {
+                                let currentContainer = $(this);
+                                if (currentContainer.find(".fa-eye-slash").length > 0) {
+                                    currentContainer.html('<i class="fa-regular fa-eye toggle-email" style="cursor:pointer; color:var(--primary); font-size:1rem;"></i>');
+                                }
+                            });
+                            // Buka email yang dipilih
+                            emailContainer.html(`<span style="color:var(--text); font-weight:600; font-size:0.85rem; margin-right:8px; background:var(--background); padding:4px 8px; border-radius:6px; border: 1px solid var(--border);">${email}</span><i class="fa fa-eye-slash toggle-email" style="cursor:pointer; color:#ef4444; font-size:1rem; vertical-align:middle;"></i>`);
                         }
                     });
                 }
