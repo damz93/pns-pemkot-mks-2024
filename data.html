@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data PNS 2024 | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+    <link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <!-- jQuery, SweetAlert2 & DataTables -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        :root {
+            --punk-pink: #ff007f;
+            --punk-cyan: #00f0ff;
+            --punk-purple: #9d00ff;
+            --punk-yellow: #ffea00;
+            --punk-dark: #110e15;
+        }
+
+        body {
+            background: url('https://images.unsplash.com/photo-1643022040583-b4be6de7fbf6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3') no-repeat center center/cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 100px;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            overflow-x: hidden;
+            background-color: var(--punk-dark);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(17,14,21,0.4) 0%, rgba(17,14,21,0.85) 100%);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: -2;
+        }
+
+        /* Manga Panel Overlay Texture */
+        .bg-manga-texture {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.08;
+            background-image: linear-gradient(45deg, #000 25%, transparent 25%), linear-gradient(-45deg, #000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 20px 20px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* HEADER POP PUNK BANNER */
+        .header-section {
+            background: var(--punk-dark);
+            border-bottom: 4px solid var(--punk-pink);
+            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.3);
+            width: 100%;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-section h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.3rem;
+            margin: 0;
+            color: #fff;
+            text-shadow: 3px 3px var(--punk-cyan);
+            letter-spacing: 2px;
+        }
+
+        .header-section p {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin: 5px 0 0;
+            color: var(--punk-yellow);
+            letter-spacing: 1px;
+        }
+
+        .logo-container img {
+            height: 55px;
+            width: auto;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .logo-container:hover img {
+            transform: scale(1.15) rotate(-8deg);
+        }
+
+        .no-style {
+            background: transparent;
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        /* CONTAINER BOX DESIGN */
+        .punk-container {
+            background: rgba(17, 14, 21, 0.9);
+            border: 3px dashed var(--punk-purple);
+            border-radius: 0px;
+            padding: 25px;
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.2);
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 80px;
+        }
+
+        /* OVERRIDE DATATABLES & TABLE LOOK */
+        .table-responsive {
+            border-radius: 0px;
+            border: 2px solid #fff;
+            box-shadow: 6px 6px 0px rgba(255, 255, 255, 0.15);
+            background: #1c1724;
+            padding: 15px;
+        }
+
+        table.dataTable {
+            background: #1c1724 !important;
+            color: #fff !important;
+            border-collapse: collapse !important;
+        }
+
+        table.dataTable thead th {
+            background: var(--punk-purple) !important;
+            color: var(--punk-yellow) !important;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-bottom: 3px solid #fff !important;
+            padding: 12px !important;
+        }
+
+        table.dataTable tbody td {
+            padding: 12px !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+            background: transparent !important;
+        }
+
+        table.dataTable tbody tr:hover td {
+            background: rgba(255, 0, 127, 0.15) !important;
+            color: var(--punk-cyan) !important;
+        }
+
+        /* Customizing DataTables elements (Search, Pagination) */
+        .dataTables_wrapper .dataTables_filter input {
+            background: var(--punk-dark) !important;
+            border: 2px solid var(--punk-cyan) !important;
+            color: white !important;
+            border-radius: 0px !important;
+            padding: 6px 10px !important;
+            font-weight: 600;
+            box-shadow: 3px 3px 0px var(--punk-pink);
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            background: var(--punk-dark) !important;
+            border: 2px solid var(--punk-purple) !important;
+            color: white !important;
+            border-radius: 0px !important;
+        }
+
+        .dataTables_wrapper .dataTables_info, 
+        .dataTables_wrapper .dataTables_paginate {
+            color: #fff !important;
+            margin-top: 15px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background: var(--punk-dark) !important;
+            border: 1px solid #fff !important;
+            color: white !important;
+            border-radius: 0px !important;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            background: var(--punk-pink) !important;
+            color: white !important;
+            border-color: var(--punk-pink) !important;
+        }
+
+        /* WIDGET SAWERIA STICKER */
+        #saweria-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #fff;
+            border: 2px solid var(--punk-pink);
+            padding: 6px 14px;
+            border-radius: 0px;
+            box-shadow: 4px 4px 0px var(--punk-dark);
+            z-index: 9999;
+            transition: all 0.2s ease;
+            transform: rotate(-2deg);
+        }
+
+        #saweria-widget:hover {
+            transform: scale(1.05) rotate(0deg);
+            box-shadow: 2px 2px 0px var(--punk-dark);
+        }
+
+        #saweria-widget img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--punk-pink);
+            background: #000;
+        }
+
+        #saweria-widget span {
+            margin-left: 6px;
+            font-size: 0.85rem;
+            color: #000;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* POPUP PERSETUJUAN */
+        .popup-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(17, 14, 21, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .popup-box {
+            background: var(--punk-dark);
+            border: 4px solid var(--punk-purple);
+            border-radius: 0px;
+            padding: 25px;
+            width: 440px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: 10px 10px 0px var(--punk-pink);
+        }
+
+        .popup-box h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.8rem;
+            color: var(--punk-cyan);
+            text-shadow: 2px 2px #000;
+            margin-bottom: 15px;
+        }
+
+        .popup-box p {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .popup-box ul {
+            text-align: left;
+            font-size: 0.85rem;
+            color: #e0e0e0;
+            margin-bottom: 25px;
+            padding-left: 15px;
+        }
+
+        .popup-box ul li {
+            margin-bottom: 8px;
+            list-style-type: square;
+        }
+
+        /* BUTTONS STICKER STYLE */
+        .btn-success {
+            background: var(--punk-yellow);
+            color: #000 !important;
+            border: 2px solid #000;
+            border-radius: 0px;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .btn-success:hover {
+            background: #fff;
+            box-shadow: 2px 2px 0px #000;
+            transform: translate(2px, 2px);
+        }
+
+        .btn-danger {
+            background: var(--punk-pink);
+            color: #fff !important;
+            border: 2px solid #fff;
+            border-radius: 0px;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .btn-danger:hover {
+            background: #ff409f;
+            box-shadow: 2px 2px 0px #000;
+            transform: translate(2px, 2px);
+        }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 576px) {
+            .header-section h2 { font-size: 1.6rem; }
+            #saweria-widget { bottom: 20px; left: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Manga Pattern Effect -->
+    <div class="bg-manga-texture"></div>
+
+    <!-- Floating Saweria Widget -->
+    <div id="saweria-widget">
+        <a href="https://saweria.co/damz93" target="_blank" style="text-decoration: none;">
+            <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" />
+            <span>Recehan Kak 💖</span>
+        </a>
+    </div>
+
+    <!-- Persetujuan Popup -->
+    <div class="popup-container" id="popup">
+        <div class="popup-box animate__animated animate__zoomIn">
+            <h2>~ PERSETUJUAN ~</h2>
+            <p>Dengan mengakses halaman ini, Anda menyetujui dan berkomitmen untuk:</p>
+            <ul>
+                <li>Menggunakan informasi yang tersedia secara bertanggung jawab.</li>
+                <li>Tidak membagikan atau menyebarluaskan data kepada pihak yang tidak berwenang.</li>
+                <li>Memanfaatkan akses ini hanya untuk keperluan yang sah.</li>
+                <li>Menjaga kerahasiaan informasi dan tidak menyalahgunakannya.</li>
+                <li>Tidak mengubah, memanipulasi, atau menyalahgunakan data.</li>
+                <li>Mematuhi ketentuan hukum dan kebijakan yang berlaku.</li>
+            </ul>
+            <div class="d-flex justify-content-center gap-3">
+                <button class="btn btn-success px-4" id="agreeBtn">Saya Setuju</button>
+                <button class="btn btn-danger px-3" id="disagreeBtn">Tidak Setuju</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Banner -->
+    <div class="header-section">
+        <div class="logo-container mb-1">
+            <a href="../pns-pemkot-mks-2024" class="no-style">
+                <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo">
+            </a>
+        </div>
+        <h2>DATA PNS 2024</h2>
+        <p>Pemerintah Kota Makassar</p>
+    </div>
+
+    <!-- Main Container App Box -->
+    <div class="container punk-container animate__animated animate__fadeIn">
+        <div class="table-responsive">
+            <table id="dataTable" class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-center">No</th>
+                        <th>Nama</th>
+                        <th>Phone</th>
+                        <th class="text-center">Email</th>
+                        <th>Satuan Kerja</th>
+                        <th>Jabatan</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Logic Engine Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const agreeBtn = document.getElementById('agreeBtn');
+            const disagreeBtn = document.getElementById('disagreeBtn');
+            const popup = document.getElementById('popup');
+
+            agreeBtn.onclick = () => popup.classList.add('hidden');
+            disagreeBtn.onclick = () => window.location.href = "https://bkpsdmd.makassarkota.go.id/";
+
+            const sheetUrl = "https://docs.google.com/spreadsheets/d/1pcwE1QG0zuQSgajTKFLqOjdHliTDxAwP0t11FkDR0XM/gviz/tq?tqx=out:json";
+
+            $.get(sheetUrl, function(data) {
+                let jsonData = data.match(/google\.visualization\.Query\.setResponse\((.*)\);/);
+                if (jsonData && jsonData[1]) {
+                    let sheetData = JSON.parse(jsonData[1]).table.rows;
+                    let formattedData = sheetData.map((r,i)=>({
+                        noper:r.c[9]?r.c[9].v:"",
+                        nama:r.c[2]?r.c[2].v:"",
+                        phone:r.c[3]?r.c[3].v:"",
+                        email:r.c[1]?r.c[1].v:"",
+                        satuanKerja:r.c[6]?r.c[6].v:"",
+                        jabatan:r.c[5]?r.c[5].v:""
+                    })).sort((a,b)=>{
+                        let sk=a.satuanKerja.localeCompare(b.satuanKerja);
+                        return sk!==0?sk:a.jabatan.localeCompare(b.jabatan);
+                    });
+
+                    formattedData.forEach((row, index)=>{
+                        $("#dataTable tbody").append(`
+                            <tr>
+                                <td class='text-center'>${index+1}</td>
+                                <td style="font-weight:700;">${row.nama.toUpperCase()}</td>
+                                <td>${row.phone}</td>
+                                <td style='text-align:center'>
+                                    <span class="email-container" data-email="${row.email.toLowerCase()}">
+                                        <i class="fa fa-eye toggle-email" style="cursor:pointer; color:var(--punk-cyan); font-size:1.1rem;"></i>
+                                    </span>
+                                </td>
+                                <td>${row.satuanKerja}</td>
+                                <td>${row.jabatan}</td>
+                            </tr>
+                        `);
+                    });
+
+                    // Inisialisasi DataTable
+                    let table = $('#dataTable').DataTable({ 
+                        pageLength: 10,
+                        language: {
+                            search: "CARI DATA:",
+                            lengthMenu: "TAMPIL _MENU_ BARIS",
+                            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ PNS",
+                            paginate: {
+                                first: "First",
+                                last: "Last",
+                                next: "⏩",
+                                previous: "⏪"
+                            }
+                        }
+                    });
+
+                    // Handler Toggle Email Pop Punk Look
+                    $(document).on("click",".toggle-email",function(){
+                        let $t=$(this);
+                        let emailContainer=$t.closest(".email-container");
+                        let email=emailContainer.attr("data-email");
+                        if($t.hasClass("fa-eye-slash")){
+                            emailContainer.html('<i class="fa fa-eye toggle-email" style="cursor:pointer; color:var(--punk-cyan); font-size:1.1rem;"></i>');
+                        } else {
+                            $(".email-container").html('<i class="fa fa-eye toggle-email" style="cursor:pointer; color:var(--punk-cyan); font-size:1.1rem;"></i>');
+                            emailContainer.html(`<span style="color:var(--punk-yellow); font-weight:600; font-size:0.9rem; margin-right:8px;">${email}</span><i class="fa fa-eye-slash toggle-email" style="cursor:pointer; color:var(--punk-pink); font-size:1.1rem;"></i>`);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

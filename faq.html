@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FAQ | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+    <link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/x-icon">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- jQuery & PapaParse -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    
+    <!-- Google Fonts (Permanent Marker untuk Pop Punk vibe, Montserrat untuk UI UI) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        :root {
+            --punk-pink: #ff007f;
+            --punk-cyan: #00f0ff;
+            --punk-purple: #9d00ff;
+            --punk-yellow: #ffea00;
+            --punk-dark: #110e15;
+        }
+
+        body {
+            background: url('https://images.unsplash.com/photo-1643022040583-b4be6de7fbf6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3') no-repeat center center/cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding-bottom: 100px;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            overflow-x: hidden;
+            background-color: var(--punk-dark);
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(17,14,21,0.4) 0%, rgba(17,14,21,0.85) 100%);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            z-index: -2;
+        }
+
+        /* Manga Panel Overlay Concept */
+        .bg-manga-texture {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.08;
+            background-image: linear-gradient(45deg, #000 25%, transparent 25%), linear-gradient(-45deg, #000 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #000 75%), linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 20px 20px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* HEADER POP PUNK BANNER */
+        .header-section {
+            background: var(--punk-dark);
+            border-bottom: 4px solid var(--punk-pink);
+            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.3);
+            width: 100%;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-section h2 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 2.5rem;
+            margin: 0;
+            color: #fff;
+            text-shadow: 3px 3px var(--punk-cyan);
+            letter-spacing: 2px;
+        }
+
+        .header-section p {
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin: 5px 0 0;
+            color: var(--punk-yellow);
+            letter-spacing: 1px;
+        }
+
+        .logo-container img {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .logo-container:hover img {
+            transform: scale(1.15) rotate(-8deg);
+        }
+
+        /* CONTAINER BOX DESIGN */
+        .punk-container {
+            background: rgba(17, 14, 21, 0.85);
+            border: 3px dashed var(--punk-purple);
+            border-radius: 0px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 0 20px rgba(157, 0, 255, 0.2);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .card {
+            background: transparent;
+            border: none;
+        }
+
+        /* SEARCH INPUT PUNK STYLE */
+        .form-control {
+            background: var(--punk-dark);
+            border: 3px solid var(--punk-cyan);
+            color: white !important;
+            border-radius: 0px;
+            padding: 12px;
+            font-weight: 600;
+            box-shadow: 4px 4px 0px var(--punk-pink);
+            margin-bottom: 25px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-control:focus {
+            background: var(--punk-dark);
+            border-color: var(--punk-yellow);
+            box-shadow: 4px 4px 0px var(--punk-purple);
+            transform: translate(-2px, -2px);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+        }
+
+        /* ACCORDION ANIME STYLE */
+        .accordion-item {
+            background: var(--punk-dark);
+            border: 2px solid #fff;
+            border-radius: 0px !important;
+            margin-bottom: 15px;
+            box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: var(--punk-pink);
+            box-shadow: 5px 5px 0px var(--punk-cyan);
+        }
+
+        .accordion-button {
+            background: #221c28;
+            color: white !important;
+            border-radius: 0px !important;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 0.95rem;
+            padding: 15px 20px;
+            border: none;
+            box-shadow: none !important;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--punk-pink);
+            color: white !important;
+        }
+
+        .accordion-body {
+            background: #1a1520;
+            color: #e0e0e0;
+            border-top: 2px solid #fff;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* BUTTONS STICKER STYLE */
+        .btn-success {
+            background: var(--punk-yellow);
+            color: #000 !important;
+            border: 2px solid #000;
+            border-radius: 0px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 12px;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .btn-success:hover {
+            background: #fff;
+            box-shadow: 2px 2px 0px #000;
+            transform: translate(2px, 2px);
+            border-color: #000;
+        }
+
+        .btn-secondary {
+            background: #333;
+            color: #fff !important;
+            border: 2px solid #fff;
+            border-radius: 0px;
+            font-weight: 800;
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0px var(--punk-pink);
+        }
+
+        /* WIDGET SAWERIA */
+        #saweria-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #fff;
+            border: 2px solid var(--punk-pink);
+            padding: 6px 14px;
+            border-radius: 0px;
+            box-shadow: 4px 4px 0px var(--punk-dark);
+            z-index: 9999;
+            transition: all 0.2s ease;
+            transform: rotate(-2deg);
+        }
+
+        #saweria-widget:hover {
+            transform: scale(1.05) rotate(0deg);
+            box-shadow: 2px 2px 0px var(--punk-dark);
+        }
+
+        #saweria-widget img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--punk-pink);
+            background: #000;
+        }
+
+        #saweria-widget span {
+            margin-left: 6px;
+            font-size: 0.85rem;
+            color: #000;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* MODAL CUSTOM */
+        .modal-content {
+            background: var(--punk-dark);
+            border: 4px solid var(--punk-purple);
+            border-radius: 0px;
+            color: white;
+            box-shadow: 10px 10px 0px var(--punk-pink);
+        }
+
+        .modal-header h5 {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.5rem;
+            color: var(--punk-cyan);
+        }
+
+        .modal-body ul li {
+            margin-bottom: 8px;
+            border-left: 3px solid var(--punk-pink);
+            padding-left: 10px;
+            list-style: none;
+        }
+
+        .btn-close {
+            filter: invert(1) grayscale(1) brightness(2);
+        }
+
+        a.no-style {
+            background: transparent;
+            color: inherit;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        @media (max-width: 576px) {
+            .punk-container { padding: 15px; }
+            .header-section h2 { font-size: 1.8rem; }
+            #saweria-widget { bottom: 20px; left: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Manga Pattern Effect -->
+    <div class="bg-manga-texture"></div>
+
+    <!-- Header Banner -->
+    <div class="header-section">
+        <div class="logo-container mb-1">
+            <a href="../pns-pemkot-mks-2024" class="no-style">
+                <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo" width="55px">
+            </a>
+        </div>
+        <h2>F A Q</h2>
+        <p>PNS Pemerintah Kota Makassar 2024</p>
+    </div>
+
+    <!-- Floating Saweria Widget -->
+    <div id="saweria-widget">
+        <a href="https://saweria.co/damz93" target="_blank" style="text-decoration: none;">
+            <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi">
+            <span>Recehan Kak 💖</span>
+        </a>
+    </div>
+
+    <!-- Main FAQ App Box -->
+    <div class="container punk-container">
+        <div class="card p-1">          
+            <input autofocus autocomplete="off" type="text" id="searchBox" class="form-control" placeholder="Mauki tanya apa tentang PNS? ⚡" onkeyup="filterFAQ()">
+            
+            <div class="accordion d-none" id="faqAccordion">
+                <!-- Data dari Google Sheets akan dimuat secara dinamis di sini -->
+            </div>
+
+            <!-- Empty State / Request Feedback Box -->
+            <div id="noResult" class="text-center mt-2 d-none animate__animated animate__fadeInUp">
+                <p class="mb-3" style="font-weight:600; color:var(--punk-yellow);">Tidak menemukan jawaban? Support dengan menambahkan FAQ lain di link berikut:</p>
+                <button class="btn btn-success w-100" onclick="openApprovalModal()">Ya, Saya mau bantu 😊</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Persetujuan Kontribusi -->
+    <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="approvalModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content animate__animated animate__zoomIn">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="approvalModalLabel">Persetujuan Kontribusi FAQ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="font-size: 0.9rem; rgba(255,255,255,0.85)">
+                    <p>Dengan memberikan informasi di FAQ ini, Anda menyatakan bahwa:</p>
+                    <ul>
+                        <li>Informasi yang diberikan adalah benar, akurat, dan dapat dipertanggungjawabkan.</li>
+                        <li>Anda tidak mengharapkan imbalan atau kompensasi dalam bentuk apa pun atas informasi yang diberikan.</li>
+                        <li>Informasi yang diberikan tidak mengandung unsur hoaks, provokasi, atau pelanggaran hukum.</li>
+                        <li>Anda memahami bahwa informasi yang diberikan dapat digunakan dan ditampilkan secara publik.</li>
+                        <li>Anda bersedia memperbarui atau mengoreksi informasi jika ditemukan kesalahan di kemudian hari.</li>
+                    </ul>
+                    <p class="mt-3 text-center font-weight-bold" style="color: var(--punk-cyan)">Apakah Anda setuju?</p>
+                </div>                
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn btn-success me-3 px-4" onclick="redirectToForm()">Ya, Saya Setuju</button>
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Tidak Setuju</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Logic Engine Script -->
+    <script>
+        const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSvEzh0Ps5yeM9uGO5vuubyRlI2ZQQXbBqIQ-r6pwWopnu3XkI5ajEvrK13cmLCa2UlfyJ4xrWMQDKs/pub?gid=1107136817&single=true&output=csv";
+        const FORM_BASE_URL = "https://forms.gle/mWLnK4T1XVK9UTFZ7";
+
+        function openApprovalModal() {
+            $("#approvalModal").modal("show");
+        }
+
+        function redirectToForm() {
+            $("#approvalModal").modal("hide");
+            window.open(FORM_BASE_URL, "_blank");
+        }
+
+        let faqData = [];
+
+        $(document).ready(function () {
+            fetchFAQ();
+        });
+
+        function fetchFAQ() {
+            fetch(SHEET_CSV_URL)
+                .then(response => response.text())
+                .then(csvText => {
+                    Papa.parse(csvText, {
+                        header: true,
+                        skipEmptyLines: true,
+                        complete: function(results) {
+                            faqData = results.data.map(row => ({
+                                question: row["Pertanyaan"] || row[3], 
+                                answer: row["Jawaban"] || row[4] 
+                            }));
+
+                            faqData.sort((a, b) => a.question.localeCompare(b.question));
+
+                            let faqHTML = faqData.map((item, index) => `
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading${index}">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}" aria-expanded="false" aria-controls="collapse${index}">
+                                            ${item.question}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse${index}" class="accordion-collapse collapse" aria-labelledby="heading${index}" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            ${item.answer}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join("");
+
+                            $("#faqAccordion").html(faqHTML);
+                        }
+                    });
+                })
+                .catch(error => {
+                    $("#faqAccordion").html("<p class='text-center text-danger'>Gagal mengambil data FAQ.</p>");
+                    console.error("Error fetching FAQ:", error);
+                });
+        }
+
+        function filterFAQ() {
+            let input = document.getElementById("searchBox").value.toLowerCase();
+            let items = document.querySelectorAll(".accordion-item");
+            let found = false;
+
+            if (input.trim() === "") {
+                $("#faqAccordion").addClass("d-none");
+                $("#noResult").addClass("d-none");
+                return;
+            }
+            if (faqData.length > 0) {
+                $("#faqAccordion").removeClass("d-none");
+            }
+
+            items.forEach(item => {
+                let question = item.querySelector(".accordion-button").textContent.toLowerCase();
+                if (question.includes(input)) {
+                    item.style.display = "";
+                    found = true;
+                } else {
+                    item.style.display = "none";
+                }
+            });
+
+            if (!found) {
+                $("#noResult").removeClass("d-none");
+            } else {
+                $("#noResult").addClass("d-none");
+            }
+        }
+    </script>
+</body>
+</html>
