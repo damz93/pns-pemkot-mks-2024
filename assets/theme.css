@@ -1,0 +1,101 @@
+/* ===== PNS Pemkot Makassar - Design System (dipakai semua halaman) ===== */
+:root{--bg:#F1F5F9;--card:#fff;--card2:#F8FAFC;--text:#0F172A;--soft:#64748B;--border:#E2E8F0;--p:#2563EB;--p2:#4F46E5;--new:#059669;--new-bg:#D1FAE5;--same:#64748B;--same-bg:#E2E8F0;--shadow:0 10px 30px -12px rgba(15,23,42,.18);--grad:linear-gradient(120deg,var(--p),var(--p2))}
+[data-theme=dark]{--bg:#0B1220;--card:#111A2E;--card2:#16213A;--text:#E5E7EB;--soft:#94A3B8;--border:#22304D;--new:#34D399;--new-bg:rgba(52,211,153,.15);--same:#94A3B8;--same-bg:rgba(148,163,184,.15);--shadow:0 10px 30px -12px rgba(0,0,0,.6)}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:96px;transition:background .25s}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:960px;margin:0 auto;padding:20px}
+.wrap.wide{max-width:1360px}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:34px 34px 90px;color:#fff;background:linear-gradient(120deg,#1D4ED8 0%,#4F46E5 55%,#7C3AED 100%);box-shadow:var(--shadow)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero::before{width:320px;height:320px;right:-80px;top:-120px}
+.hero::after{width:200px;height:200px;right:180px;bottom:-110px}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:20px}
+.hero img{height:70px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25));transition:transform .25s}
+.hero a:hover img{transform:scale(1.07)}
+.hero h1{margin:0;font-size:clamp(1.35rem,3vw,2.1rem);font-weight:800;letter-spacing:-.5px}
+.hero p{margin:6px 0 0;opacity:.85;font-weight:500;font-size:.95rem}
+.hero.center{text-align:center;padding-bottom:96px}
+.hero.center .hero-in{flex-direction:column;gap:14px}
+.hero.center img{height:92px}
+.theme-btn{position:absolute;top:0;right:0;width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;font-size:1rem;backdrop-filter:blur(6px)}
+.hero:not(.center) .theme-btn{top:50%;transform:translateY(-50%)}
+.theme-btn:hover{background:rgba(255,255,255,.28)}
+.hero-in .theme-btn{position:absolute}
+.hero:not(.center) .hero-in{padding-right:56px}
+
+/* PANEL & KOMPONEN */
+.panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.lift{position:relative;z-index:2;margin:-56px 20px 0}
+.search{position:relative;margin-bottom:16px}
+.search i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--soft)}
+.search input{width:100%;padding:14px 16px 14px 44px;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-family:inherit;font-weight:500;font-size:.95rem;outline:none;transition:.15s}
+.search input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(37,99,235,.18)}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px;color:var(--soft);font-size:.85rem;font-weight:600}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:12px;scrollbar-width:thin}
+.chip{border:1px solid var(--border);background:var(--card2);color:var(--soft);border-radius:999px;padding:7px 14px;font-family:inherit;font-weight:600;font-size:.8rem;cursor:pointer;white-space:nowrap;transition:.15s}
+.chip:hover{border-color:var(--p);color:var(--p)}
+.chip.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 4px 10px rgba(37,99,235,.3)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:11px 22px;font-family:inherit;font-weight:700;font-size:.88rem;cursor:pointer;transition:.15s}
+.btn.ok{background:var(--grad);color:#fff}.btn.ok:hover{filter:brightness(1.1)}
+.btn.no{background:var(--card2);color:var(--soft);border:1px solid var(--border)}
+.state{padding:50px 0;text-align:center;color:var(--soft);font-weight:600}
+.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--border);border-top-color:var(--p);margin:0 auto 14px;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:.74rem;font-weight:700;background:rgba(37,99,235,.1);color:var(--p)}
+
+/* MENU TILES */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.tile{position:relative;display:flex;flex-direction:column;gap:10px;padding:20px;border:1px solid var(--border);border-radius:18px;background:var(--card);transition:.2s}
+.tile:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:var(--p)}
+.tile .ic{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;color:#fff;font-size:1.25rem}
+.tile b{font-size:1rem;font-weight:800}
+.tile small{color:var(--soft);font-size:.8rem;line-height:1.45}
+.tile .go{position:absolute;right:18px;top:20px;color:var(--soft);transition:.2s}
+.tile:hover .go{transform:translateX(3px);color:var(--p)}
+
+/* ACCORDION (details) */
+.acc{display:grid;gap:10px}
+.acc details{border:1px solid var(--border);border-radius:14px;background:var(--card);overflow:hidden;transition:.15s}
+.acc details[open]{border-color:var(--p);box-shadow:0 6px 18px -10px rgba(37,99,235,.5)}
+.acc summary{list-style:none;cursor:pointer;padding:15px 18px;font-weight:700;font-size:.92rem;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"\f078";font-family:"Font Awesome 6 Free";font-weight:900;font-size:.75rem;color:var(--soft);transition:transform .2s;flex:none}
+.acc details[open] summary::after{transform:rotate(180deg);color:var(--p)}
+.acc .ans{padding:0 18px 16px;color:var(--soft);font-size:.9rem;line-height:1.65;font-weight:500}
+.acc .ans a{color:var(--p);font-weight:600;text-decoration:underline}
+
+/* KARTU ISTILAH */
+.terms{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.term{content-visibility:auto;contain-intrinsic-size:auto 130px;border:1px solid var(--border);border-radius:14px;padding:16px;background:var(--card);transition:.15s}
+.term:hover{border-color:var(--p);transform:translateY(-2px);box-shadow:var(--shadow)}
+.term h3{margin:0 0 6px;font-size:1.15rem;font-weight:800;color:var(--p)}
+.term p{margin:0 0 12px;color:var(--text);font-size:.88rem;line-height:1.5;font-weight:500}
+.term small{color:var(--soft);font-weight:600;font-size:.75rem}
+
+/* DIALOG */
+dialog{border:1px solid var(--border);border-radius:20px;background:var(--card);color:var(--text);padding:28px;width:min(460px,calc(100% - 32px));box-shadow:0 25px 50px -12px rgba(0,0,0,.4)}
+dialog::backdrop{background:rgba(15,23,42,.55);backdrop-filter:blur(5px)}
+dialog h2{margin:0 0 10px;font-size:1.25rem;font-weight:800}
+dialog ul{padding-left:20px;font-size:.86rem;line-height:1.5;color:var(--soft)}
+dialog li{margin-bottom:7px}
+.btns{display:flex;gap:10px;justify-content:center;margin-top:20px}
+
+/* WIDGET & TICKER */
+#saweria-widget{position:fixed;bottom:22px;left:22px;background:var(--card);border:1px solid var(--border);padding:8px 16px 8px 10px;border-radius:30px;box-shadow:var(--shadow);z-index:900;display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;transition:transform .2s}
+#saweria-widget:hover{transform:translateY(-2px)}
+#saweria-widget img{width:26px;height:26px;border-radius:50%;object-fit:cover}
+.has-ticker #saweria-widget{bottom:68px}
+.ticker{position:fixed;left:0;right:0;bottom:0;height:46px;background:var(--card);border-top:1px solid var(--border);display:flex;align-items:center;z-index:800;overflow:hidden}
+.ticker .tag{flex:none;background:var(--grad);color:#fff;font-weight:800;font-size:.72rem;letter-spacing:.5px;padding:0 16px;height:100%;display:flex;align-items:center;gap:6px}
+.ticker .roll{flex:1;overflow:hidden;white-space:nowrap}
+.ticker .roll span{display:inline-block;padding-left:100%;font-weight:600;font-size:.88rem;animation:tick 25s linear infinite}
+.ticker .roll:hover span{animation-play-state:paused}
+@keyframes tick{to{transform:translateX(-100%)}}
+
+.caret::after{content:"|";margin-left:2px;animation:blink 1s steps(2) infinite;opacity:.7}
+@keyframes blink{50%{opacity:0}}
+@media(max-width:600px){.wrap{padding:12px}.hero{padding:22px 20px 84px}.hero img{height:54px}.hero.center img{height:76px}.panel{padding:14px}.lift{margin:-56px 8px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

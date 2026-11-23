@@ -1,451 +1,90 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>FAQ | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
-    <link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/x-icon">
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- jQuery & PapaParse -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    
-    <!-- Google Fonts & FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    <style>
-        :root {
-            --primary: #3B82F6;
-            --primary-dark: #2563EB;
-            --secondary: #60A5FA;
-            --accent: #93C5FD;
-            --background: #F8FAFC;
-            --card: #FFFFFF;
-            --text: #1E293B;
-            --text-soft: #64748B;
-            --border: #E2E8F0;
-        }
-
-        body {
-            background-color: var(--background);
-            min-height: 100vh;
-            margin: 0;
-            padding-bottom: 80px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* MAIN CONTAINER CARD */
-        .main-container {
-            width: 100%;
-            max-width: 900px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            padding: 30px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-
-        /* NEO GOV HEADER */
-        .header-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 25px;
-            margin-bottom: 25px;
-        }
-
-        .logo-box img {
-            height: 65px;
-            width: auto;
-            transition: transform 0.2s ease;
-        }
-
-        .logo-box:hover img {
-            transform: scale(1.05);
-        }
-
-        .title-box h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 0;
-            letter-spacing: -0.5px;
-        }
-
-        .title-box p {
-            font-size: 0.95rem;
-            color: var(--text-soft);
-            margin: 4px 0 0;
-            font-weight: 500;
-        }
-
-        .no-style {
-            background: transparent;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* SEARCH BAR ENGINE */
-        .form-control {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--background);
-            color: var(--text) !important;
-            outline: none;
-            box-shadow: none;
-            transition: all 0.2s ease;
-            margin-bottom: 25px;
-        }
-
-        .form-control::placeholder {
-            color: var(--text-soft);
-            font-weight: 400;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            background: var(--card);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-
-        /* ACCORDION CLEAN SYSTEM */
-        .accordion-item {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px !important;
-            margin-bottom: 14px;
-            overflow: hidden;
-            transition: all 0.2s ease;
-        }
-
-        .accordion-item:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            border-color: var(--secondary);
-        }
-
-        .accordion-button {
-            background: var(--card);
-            color: var(--text) !important;
-            font-weight: 700;
-            font-size: 0.95rem;
-            padding: 18px 20px;
-            border: none;
-            box-shadow: none !important;
-        }
-
-        .accordion-button:not(.collapsed) {
-            background: rgba(59, 130, 246, 0.04);
-            color: var(--primary-dark) !important;
-        }
-
-        .accordion-body {
-            background: var(--card);
-            color: var(--text);
-            border-top: 1px solid var(--border);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            padding: 20px;
-        }
-
-        /* BUTTON DESIGN */
-        .btn-success {
-            background: var(--primary);
-            border: 1px solid var(--primary-dark);
-            color: #fff !important;
-            border-radius: 8px;
-            font-weight: 600;
-            padding: 12px 24px;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            box-shadow: none;
-        }
-
-        .btn-success:hover {
-            background: var(--primary-dark);
-            border-color: var(--primary-dark);
-        }
-
-        .btn-secondary {
-            background: #fff;
-            color: var(--text-soft) !important;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-weight: 600;
-            padding: 12px 24px;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .btn-secondary:hover {
-            background: var(--background);
-            border-color: var(--border);
-        }
-
-        /* MINIMALIST FLOATING SAWERIA WIDGET */
-        #saweria-widget {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            z-index: 9999;
-            transition: all 0.2s ease;
-        }
-
-        #saweria-widget:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-        }
-
-        #saweria-widget a {
-            text-decoration: none;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-        }
-
-        #saweria-widget img {
-            width: 24px;
-            height: 24px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        #saweria-widget span {
-            margin-left: 8px;
-            font-size: 0.85rem;
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* MODAL STRUCTURE */
-        .modal-content {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            color: var(--text);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .modal-header h5 {
-            font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--text);
-        }
-
-        .modal-body ul li {
-            margin-bottom: 10px;
-            border-left: 3px solid var(--primary);
-            padding-left: 12px;
-            list-style: none;
-            font-weight: 500;
-            color: var(--text-soft);
-        }
-
-        .modal-footer {
-            border-top: 1px solid var(--border);
-        }
-
-        .btn-close {
-            filter: none;
-        }
-
-        @media (max-width: 768px) {
-            .header-area {
-                flex-direction: column;
-                text-align: center;
-            }
-            .title-box h2 { font-size: 1.35rem; }
-            .main-container { padding: 20px; margin-top: 20px; }
-            #saweria-widget { bottom: 20px; left: 15px; }
-        }
-    </style>
+<title>FAQ | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="assets/theme.css" />
+<script src="assets/theme.js"></script>
 </head>
 <body>
+<a id="saweria-widget" href="https://saweria.co/damz93" target="_blank" rel="noopener"><img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" /> Recehan Kak 💖</a>
 
-    <!-- Minimalist Floating Widget -->
-    <div id="saweria-widget">
-        <a href="https://saweria.co/damz93" target="_blank">
-            <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi">
-            <span>Recehan Kak 💖</span>
-        </a>
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-in">
+      <a href="../pns-pemkot-mks-2024" title="Kembali ke Menu Utama"><img src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Logo Makassar" /></a>
+      <div><h1>FAQ</h1><p>Tanya jawab PNS Pemerintah Kota Makassar</p></div>
+      <button class="theme-btn" data-theme-toggle title="Ganti tema" aria-label="Ganti tema"></button>
     </div>
+  </header>
 
-    <!-- Main App Container Box -->
-    <div class="container main-container animate__animated animate__fadeIn">
-        
-        <!-- Header Section -->
-        <div class="header-area">
-            <div class="logo-box">
-                <a href="../pns-pemkot-mks-2024" class="no-style">
-                    <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo">
-                </a>
-            </div>
-            <div class="title-box">
-                <h2>FREQUENTLY ASKED QUESTIONS (FAQ)</h2>
-                <p>Sistem Informasi Tanya Jawab PNS Pemerintah Kota Makassar</p>
-            </div>
-        </div>
+  <main class="panel lift">
+    <div class="search"><i class="fa-solid fa-magnifying-glass"></i>
+      <input id="q" type="search" autofocus autocomplete="off" placeholder="Ketik kata kunci pertanyaan atau jawaban..." /></div>
+    <div class="bar"><span id="count">&nbsp;</span>
+      <button class="btn ok" id="ask"><i class="fa-regular fa-paper-plane"></i> Ajukan FAQ Baru</button></div>
+    <div id="state" class="state"><div class="spin"></div>Memuat FAQ...</div>
+    <div class="acc" id="acc"></div>
+    <div id="none" class="state" hidden>Tidak menemukan jawaban yang dicari?<br><br>
+      <button class="btn ok" id="ask2"><i class="fa-regular fa-paper-plane"></i> Ajukan Pertanyaan / Jawaban Baru</button></div>
+  </main>
+</div>
 
-        <!-- Interactive Search Engine -->
-        <input autofocus autocomplete="off" type="text" id="searchBox" class="form-control" placeholder="Ketik kata kunci pertanyaan di sini untuk mencari..." onkeyup="filterFAQ()">
-        
-        <!-- Accordion Workspace -->
-        <div class="accordion d-none" id="faqAccordion">
-            <!-- Data dari Google Sheets dimuat secara dinamis melalui JavaScript -->
-        </div>
+<dialog id="dlg">
+  <h2>Persetujuan Kontribusi FAQ</h2>
+  <p style="margin:0;font-size:.88rem;font-weight:600">Dengan memberikan kontribusi informasi, Anda menyetujui:</p>
+  <ul>
+    <li>Informasi yang diberikan benar, akurat, dan dapat dipertanggungjawabkan.</li>
+    <li>Tidak mengharapkan imbalan atau kompensasi dalam bentuk apa pun.</li>
+    <li>Informasi tidak mengandung hoaks, SARA, provokasi, atau pelanggaran hukum.</li>
+    <li>Informasi akan divalidasi dan ditampilkan secara publik.</li>
+    <li>Bersedia memperbarui data jika ada kekeliruan atau perubahan regulasi.</li>
+  </ul>
+  <div class="btns"><button class="btn ok" id="yes">Ya, Saya Setuju</button><button class="btn no" id="cancel">Batalkan</button></div>
+</dialog>
 
-        <!-- Empty State / Support Action Container -->
-        <div id="noResult" class="text-center mt-4 d-none animate__animated animate__fadeIn">
-            <p class="mb-3" style="font-weight:600; color: var(--text-soft);">Tidak menemukan jawaban yang dicari? Anda dapat berkontribusi menambahkan FAQ baru.</p>
-            <button class="btn btn-success w-100" onclick="openApprovalModal()"><i class="fa-regular fa-paper-plane me-2"></i> Ajukan Pertanyaan / Jawaban Baru</button>
-        </div>
-    </div>
+<script>
+(function () {
+  var URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSvEzh0Ps5yeM9uGO5vuubyRlI2ZQQXbBqIQ-r6pwWopnu3XkI5ajEvrK13cmLCa2UlfyJ4xrWMQDKs/pub?gid=1107136817&single=true&output=csv";
+  var FORM = "https://forms.gle/mWLnK4T1XVK9UTFZ7";
+  var $ = function (id) { return document.getElementById(id); }, P = PNS, nodes = [];
 
-    <!-- Modal Persetujuan Kontribusi -->
-    <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="approvalModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content animate__animated animate__fadeInUpFast">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="approvalModalLabel">Persetujuan Kontribusi FAQ</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" style="font-size: 0.9rem;">
-                    <p class="mb-3 font-weight-bold" style="color: var(--text)">Dengan memberikan kontribusi informasi, Anda menyetujui:</p>
-                    <ul>
-                        <li>Informasi yang diberikan adalah benar, akurat, dan dapat dipertanggungjawabkan.</li>
-                        <li>Tidak mengharapkan imbalan atau kompensasi dalam bentuk apa pun atas informasi tersebut.</li>
-                        <li>Informasi tidak mengandung unsur hoaks, SARA, provokasi, atau pelanggaran hukum.</li>
-                        <li>Memahami bahwa informasi yang diberikan akan divalidasi dan ditampilkan secara publik.</li>
-                        <li>Bersedia memperbarui data jika ditemukan kekeliruan atau perubahan regulasi di masa mendatang.</li>
-                    </ul>
-                    <p class="mt-3 text-center font-weight-bold" style="color: var(--primary-dark)">Apakah Anda menyatakan setuju dan ingin melanjutkan?</p>
-                </div>                
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="button" class="btn btn-success px-4" onclick="redirectToForm()">Ya, Saya Setuju</button>
-                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Batalkan</button>
-                </div>
-            </div>
-        </div>
-    </div>
+  var dlg = $('dlg');
+  function openDlg() { dlg.showModal(); }
+  $('ask').onclick = $('ask2').onclick = openDlg;
+  $('cancel').onclick = function () { dlg.close(); };
+  $('yes').onclick = function () { dlg.close(); window.open(FORM, '_blank', 'noopener'); };
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
 
-    <!-- Bootstrap Bundle JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  fetch(URL).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (txt) {
+    var rows = P.csv(txt), h = rows[0].map(function (x) { return x.trim().toLowerCase(); });
+    var qi = h.indexOf('pertanyaan'), ai = h.indexOf('jawaban');
+    if (qi < 0) qi = 3; if (ai < 0) ai = 4;
+    var items = rows.slice(1).map(function (r) { return { q: (r[qi] || '').trim(), a: (r[ai] || '').trim() }; })
+      .filter(function (x) { return x.q; }).sort(function (a, b) { return a.q.localeCompare(b.q); });
 
-    <!-- Logic Engine Script Framework -->
-    <script>
-        const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSvEzh0Ps5yeM9uGO5vuubyRlI2ZQQXbBqIQ-r6pwWopnu3XkI5ajEvrK13cmLCa2UlfyJ4xrWMQDKs/pub?gid=1107136817&single=true&output=csv";
-        const FORM_BASE_URL = "https://forms.gle/mWLnK4T1XVK9UTFZ7";
+    $('acc').innerHTML = items.map(function (it) {
+      return '<details name="faq" data-k="' + P.esc((it.q + ' ' + it.a).toLowerCase()) + '"><summary>' + P.esc(it.q) +
+             '</summary><div class="ans">' + P.clean(it.a) + '</div></details>';
+    }).join('');
+    nodes = Array.from($('acc').children);
+    $('state').hidden = true; filter();
+  }).catch(function () {
+    $('state').innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#F59E0B"></i><br><br>FAQ gagal dimuat. Muat ulang halaman.';
+  });
 
-        function openApprovalModal() {
-            $("#approvalModal").modal("show");
-        }
-
-        function redirectToForm() {
-            $("#approvalModal").modal("hide");
-            window.open(FORM_BASE_URL, "_blank");
-        }
-
-        let faqData = [];
-
-        $(document).ready(function () {
-            fetchFAQ();
-        });
-
-        function fetchFAQ() {
-            fetch(SHEET_CSV_URL)
-                .then(response => response.text())
-                .then(csvText => {
-                    Papa.parse(csvText, {
-                        header: true,
-                        skipEmptyLines: true,
-                        complete: function(results) {
-                            faqData = results.data.map(row => ({
-                                question: row["Pertanyaan"] || row[3], 
-                                answer: row["Jawaban"] || row[4] 
-                            }));
-
-                            // Urutkan alfabetis berdasarkan Pertanyaan (ASC)
-                            faqData.sort((a, b) => a.question.localeCompare(b.question));
-
-                            let faqHTML = faqData.map((item, index) => `
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="heading${index}">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}" aria-expanded="false" aria-controls="collapse${index}">
-                                            ${item.question}
-                                        </button>
-                                    </h2>
-                                    <div id="collapse${index}" class="accordion-collapse collapse" aria-labelledby="heading${index}" data-bs-parent="#faqAccordion">
-                                        <div class="accordion-body">
-                                            ${item.answer}
-                                        </div>
-                                    </div>
-                                </div>
-                            `).join("");
-
-                            $("#faqAccordion").html(faqHTML);
-                        }
-                    });
-                })
-                .catch(error => {
-                    $("#faqAccordion").html("<p class='text-center text-danger' style='font-weight: 500;'>Gagal memetakan data FAQ dari sistem cloud.</p>");
-                    console.error("Error fetching FAQ database:", error);
-                });
-        }
-
-        function filterFAQ() {
-            let input = document.getElementById("searchBox").value.toLowerCase();
-            let items = document.querySelectorAll(".accordion-item");
-            let found = false;
-
-            if (input.trim() === "") {
-                $("#faqAccordion").addClass("d-none");
-                $("#noResult").addClass("d-none");
-                return;
-            }
-            if (faqData.length > 0) {
-                $("#faqAccordion").removeClass("d-none");
-            }
-
-            items.forEach(item => {
-                let question = item.querySelector(".accordion-button").textContent.toLowerCase();
-                if (question.includes(input)) {
-                    item.style.display = "";
-                    found = true;
-                } else {
-                    item.style.display = "none";
-                }
-            });
-
-            if (!found) {
-                $("#noResult").removeClass("d-none");
-            } else {
-                $("#noResult").addClass("d-none");
-            }
-        }
-    </script>
+  function filter() {
+    var v = $('q').value.toLowerCase().trim(), n = 0;
+    nodes.forEach(function (d) { var m = !v || d.dataset.k.indexOf(v) > -1; d.hidden = !m; if (m) n++; else d.open = false; });
+    $('count').textContent = n + ' dari ' + nodes.length + ' pertanyaan';
+    $('none').hidden = !(nodes.length && n === 0);
+  }
+  var tm; $('q').addEventListener('input', function () { clearTimeout(tm); tm = setTimeout(filter, 120); });
+})();
+</script>
 </body>
 </html>

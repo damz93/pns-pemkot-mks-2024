@@ -1,302 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Istilah-istilah dalam PNS | CPNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
-    <link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    <style>
-        :root {
-            --primary: #3B82F6;
-            --primary-dark: #2563EB;
-            --secondary: #60A5FA;
-            --accent: #93C5FD;
-            --background: #F8FAFC;
-            --card: #FFFFFF;
-            --text: #1E293B;
-            --text-soft: #64748B;
-            --border: #E2E8F0;
-        }
-
-        body {
-            background-color: var(--background);
-            min-height: 100vh;
-            margin: 0;
-            padding-bottom: 80px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text);
-        }
-
-        /* MAIN CONTAINER CARD */
-        .main-container {
-            width: 100%;
-            max-width: 900px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            padding: 30px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-
-        /* NEO GOV HEADER */
-        .header-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 25px;
-            margin-bottom: 25px;
-        }
-
-        .logo-box img {
-            height: 65px;
-            width: auto;
-            transition: transform 0.2s ease;
-        }
-
-        .logo-box:hover img {
-            transform: scale(1.05);
-        }
-
-        .title-box h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 0;
-            letter-spacing: -0.5px;
-        }
-
-        .title-box p {
-            font-size: 0.95rem;
-            color: var(--text-soft);
-            margin: 4px 0 0;
-            font-weight: 500;
-        }
-
-        .no-style {
-            background: transparent;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* SEARCH ENGINE BAR */
-        .search-wrapper {
-            margin-bottom: 25px;
-        }
-
-        #search {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--background);
-            color: var(--text);
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        #search::placeholder {
-            color: var(--text-soft);
-            font-weight: 400;
-        }
-
-        #search:focus {
-            border-color: var(--primary);
-            background: var(--card);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-
-        /* LIST ITEMS STYLE */
-        .item {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin-bottom: 14px;
-            padding: 18px;
-            border-left: 4px solid var(--primary);
-            transition: all 0.2s ease;
-        }
-
-        .item:hover {
-            transform: translateY(-2px);
-            border-left-color: var(--primary-dark);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-            background: rgba(59, 130, 246, 0.01);
-        }
-
-        .singkatan {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-            margin-bottom: 6px;
-            letter-spacing: -0.3px;
-        }
-
-        .penjelasan {
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            color: var(--text);
-            line-height: 1.5;
-        }
-
-        .kategori {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-soft);
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: var(--background);
-            padding: 3px 8px;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-        }
-
-        /* MINIMALIST FLOATING SAWERIA WIDGET */
-        #saweria-widget {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            z-index: 9999;
-            transition: all 0.2s ease;
-        }
-
-        #saweria-widget:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-        }
-
-        #saweria-widget a {
-            text-decoration: none;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-        }
-
-        #saweria-widget img {
-            width: 24px;
-            height: 24px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        #saweria-widget span {
-            margin-left: 8px;
-            font-size: 0.85rem;
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        @media (max-width: 768px) {
-            .header-area {
-                flex-direction: column;
-                text-align: center;
-            }
-            .title-box h2 { font-size: 1.35rem; }
-            .main-container { padding: 20px; margin-top: 20px; }
-        }
-    </style>
+<title>Istilah-istilah dalam PNS | CPNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="assets/theme.css" />
+<script src="assets/theme.js"></script>
 </head>
 <body>
+<a id="saweria-widget" href="https://saweria.co/damz93" target="_blank" rel="noopener"><img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" /> Boleh Kak Recehannya 💖</a>
 
-    <div id="saweria-widget">
-        <a href="https://saweria.co/damz93" target="_blank">
-            <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi">
-            <span>Boleh Kak Recehannya 💖</span>
-        </a>
+<div class="wrap wide">
+  <header class="hero">
+    <div class="hero-in">
+      <a href="../pns-pemkot-mks-2024" title="Kembali ke Menu Utama"><img src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Logo Makassar" /></a>
+      <div><h1>DAFTAR ISTILAH &amp; SINGKATAN</h1><p>Kamus informasi PNS Pemerintah Kota Makassar</p></div>
+      <button class="theme-btn" data-theme-toggle title="Ganti tema" aria-label="Ganti tema"></button>
     </div>
+  </header>
 
-    <div class="container main-container animate__animated animate__fadeIn">
-        
-        <div class="header-area">
-            <div class="logo-box">
-                <a href="../pns-pemkot-mks-2024" class="no-style">
-                    <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo">
-                </a>
-            </div>
-            <div class="title-box">
-                <h2>DAFTAR ISTILAH & SINGKATAN</h2>
-                <p>Sistem Kamus Informasi CPNS Pemerintah Kota Makassar</p>
-            </div>
-        </div>
+  <main class="panel lift">
+    <div class="search"><i class="fa-solid fa-magnifying-glass"></i>
+      <input id="q" type="search" autofocus autocomplete="off" placeholder="Cari singkatan, kategori, atau penjelasan istilah..." /></div>
+    <div class="chips" id="chips"></div>
+    <div class="bar"><span id="count">&nbsp;</span></div>
+    <div id="state" class="state"><div class="spin"></div>Memuat istilah...</div>
+    <div class="terms" id="list"></div>
+  </main>
+</div>
 
-        <div class="search-wrapper">
-            <input type="text" id="search" placeholder="Cari singkatan, kategori, atau penjelasan istilah..." autofocus autocomplete="off">
-        </div>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); }, esc = PNS.esc, data = [], S = { q: '', cat: '' };
 
-        <div id="list-container"></div>
+  fetch('json/istilah.json').then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }).then(function (d) {
+    data = d.sort(function (a, b) { return a.singkatan.localeCompare(b.singkatan); });
+    data.forEach(function (x) { x.k = (x.singkatan + ' ' + x.penjelasan + ' ' + x.kategori).toLowerCase(); });
 
-    </div>
+    var cats = {}; data.forEach(function (x) { cats[x.kategori] = (cats[x.kategori] || 0) + 1; });
+    $('chips').innerHTML = '<button class="chip on" data-c="">Semua (' + data.length + ')</button>' +
+      Object.keys(cats).sort().map(function (c) { return '<button class="chip" data-c="' + esc(c) + '">' + esc(c) + ' (' + cats[c] + ')</button>'; }).join('');
+    $('state').hidden = true; render();
+  }).catch(function (e) {
+    $('state').innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#F59E0B"></i><br><br>Gagal memuat data: ' + esc(e.message);
+  });
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const container = document.getElementById("list-container");
-            const searchInput = document.getElementById("search");
+  function render() {
+    var v = S.q, out = data.filter(function (x) { return (!S.cat || x.kategori === S.cat) && (!v || x.k.indexOf(v) > -1); });
+    $('count').textContent = out.length + ' istilah ditemukan';
+    $('list').innerHTML = out.length ? out.map(function (x) {
+      return '<article class="term"><h3>' + esc(x.singkatan) + '</h3><p>' + esc(x.penjelasan) +
+             '</p><small><i class="fa-regular fa-folder-open" style="color:var(--p)"></i> ' + esc(x.kategori) + '</small></article>';
+    }).join('') : '<div class="state" style="grid-column:1/-1">Tidak ada hasil ditemukan.</div>';
+  }
 
-            const loadData = async () => {
-                try {
-                    const response = await fetch("json/istilah.json");
-                    if (!response.ok) throw new Error("Network response was not ok");
-                    let data = await response.json();
-
-                    // Sort by singkatan ASC
-                    data.sort((a, b) => a.singkatan.localeCompare(b.singkatan));
-
-                    let istilahList = data;
-                    renderList(istilahList);
-
-                    searchInput.addEventListener("input", () => {
-                        const keyword = searchInput.value.toLowerCase();
-                        const filtered = istilahList.filter(item =>
-                            item.singkatan.toLowerCase().includes(keyword) ||
-                            item.penjelasan.toLowerCase().includes(keyword) ||
-                            item.kategori.toLowerCase().includes(keyword)
-                        );
-                        renderList(filtered);
-                    });
-                } catch (error) {
-                    container.innerHTML = `<p style="color: var(--text-soft); font-weight: 500;">Gagal memuat data: ${error.message}</p>`;
-                }
-            };
-
-            const renderList = (items) => {
-                container.innerHTML = "";
-                if (items.length === 0) {
-                    container.innerHTML = "<p style='color: var(--text-soft); font-weight: 500; padding: 10px;'>Tidak ada hasil ditemukan.</p>";
-                    return;
-                }
-
-                items.forEach(item => {
-                    const div = document.createElement("div");
-                    div.className = "item animate__animated animate__fadeInFast";
-                    div.innerHTML = `
-                        <div class="singkatan">${item.singkatan}</div>
-                        <div class="penjelasan">${item.penjelasan}</div>
-                        <div class="kategori"><i class="fa-regular fa-folder-open" style="color: var(--primary); margin-right: 3px;"></i> ${item.kategori}</div>
-                    `;
-                    container.appendChild(div);
-                });
-            };
-
-            loadData();
-        });
-    </script>
+  var tm; $('q').addEventListener('input', function () { clearTimeout(tm); var s = this.value; tm = setTimeout(function () { S.q = s.toLowerCase().trim(); render(); }, 120); });
+  $('chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    $('chips').querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on'); }); b.classList.add('on');
+    S.cat = b.dataset.c; render();
+  });
+})();
+</script>
 </body>
 </html>

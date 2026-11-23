@@ -1,488 +1,350 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Data PNS 2024 | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
-    <link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
-    
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-    
-    <!-- jQuery, SweetAlert2 & DataTables -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
-    
-    <!-- Google Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Data PNS 2024 | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+<link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-    <style>
-        :root {
-            --primary: #3B82F6;
-            --primary-dark: #2563EB;
-            --secondary: #60A5FA;
-            --accent: #93C5FD;
-            --background: #F8FAFC;
-            --card: #FFFFFF;
-            --text: #1E293B;
-            --text-soft: #64748B;
-            --border: #E2E8F0;
-        }
+<style>
+:root{
+  --bg:#F1F5F9; --card:#fff; --card2:#F8FAFC; --text:#0F172A; --soft:#64748B; --border:#E2E8F0;
+  --p:#2563EB; --p2:#4F46E5; --new:#059669; --new-bg:#D1FAE5; --same:#64748B; --same-bg:#E2E8F0;
+  --shadow:0 10px 30px -12px rgba(15,23,42,.18);
+}
+[data-theme=dark]{
+  --bg:#0B1220; --card:#111A2E; --card2:#16213A; --text:#E5E7EB; --soft:#94A3B8; --border:#22304D;
+  --new:#34D399; --new-bg:rgba(52,211,153,.15); --same:#94A3B8; --same-bg:rgba(148,163,184,.15);
+  --shadow:0 10px 30px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:90px;transition:background .25s}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1360px;margin:0 auto;padding:20px}
 
-        body {
-            background-color: var(--background);
-            min-height: 100vh;
-            margin: 0;
-            padding-bottom: 80px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text);
-        }
+/* HERO */
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:34px 34px 90px;color:#fff;background:linear-gradient(120deg,#1D4ED8 0%,#4F46E5 55%,#7C3AED 100%);box-shadow:var(--shadow)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
+.hero::before{width:320px;height:320px;right:-80px;top:-120px}
+.hero::after{width:200px;height:200px;right:180px;bottom:-110px}
+.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:20px}
+.hero img{height:70px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25));transition:transform .2s}
+.hero a:hover img{transform:scale(1.06)}
+.hero h1{margin:0;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800;letter-spacing:-.5px}
+.hero p{margin:6px 0 0;opacity:.85;font-weight:500;font-size:.95rem}
+.theme-btn{margin-left:auto;width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;font-size:1rem;backdrop-filter:blur(6px)}
+.theme-btn:hover{background:rgba(255,255,255,.25)}
 
-        /* MAIN CONTAINER CARD */
-        .main-container {
-            width: 100%;
-            max-width: 1200px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            padding: 30px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
+/* STATS */
+.stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:-58px 22px 22px}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow)}
+.stat i{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:1.1rem;color:#fff;flex:none}
+.stat b{display:block;font-size:1.6rem;font-weight:800;line-height:1.1}
+.stat span{font-size:.75rem;color:var(--soft);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
 
-        /* NEO GOV HEADER */
-        .header-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 25px;
-            margin-bottom: 30px;
-        }
+/* PANEL */
+.panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
+.filters{display:grid;grid-template-columns:auto 1fr 1fr;gap:14px;align-items:end;margin-bottom:18px}
+.seg{display:inline-flex;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:4px;gap:2px}
+.seg button{border:0;background:transparent;color:var(--soft);font-weight:600;font-size:.82rem;font-family:inherit;padding:8px 14px;border-radius:9px;cursor:pointer;white-space:nowrap;transition:.15s}
+.seg button.on{background:linear-gradient(120deg,var(--p),var(--p2));color:#fff;box-shadow:0 4px 10px rgba(37,99,235,.3)}
+.seg button small{opacity:.8;margin-left:4px}
+.fld label{display:block;font-size:.7rem;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.fld select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-weight:500;font-size:.88rem;font-family:inherit;outline:none}
+.fld select:focus,.dataTables_filter input:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(37,99,235,.18)}
 
-        .logo-box img {
-            height: 65px;
-            width: auto;
-            transition: transform 0.2s ease;
-        }
+/* DATATABLES */
+.tbl-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:14px}
+.dataTables_wrapper{color:var(--text)!important}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.dataTables_filter input{background:var(--card2)!important;border:1px solid var(--border)!important;color:var(--text)!important;border-radius:10px!important;padding:10px 14px!important;min-width:260px;outline:none;font-family:inherit;margin-left:0!important}
+.dataTables_length select{background:var(--card2)!important;border:1px solid var(--border)!important;color:var(--text)!important;border-radius:8px!important;padding:6px 10px!important;margin:0 6px}
+.dataTables_length,.dataTables_filter,.dataTables_info{color:var(--soft)!important;font-size:.85rem;font-weight:500}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:14px}
+table.dataTable{width:100%!important;margin:0!important;border-collapse:collapse!important;background:var(--card)!important}
+table.dataTable thead th{background:var(--card2)!important;color:var(--soft)!important;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid var(--border)!important;padding:14px 12px!important;white-space:nowrap}
+table.dataTable tbody td{padding:13px 12px!important;border-bottom:1px solid var(--border)!important;font-size:.88rem;vertical-align:middle;background:transparent!important;color:var(--text)}
+table.dataTable tbody tr{background:var(--card)!important}
+table.dataTable tbody tr:hover{background:var(--card2)!important}
+table.dataTable.no-footer{border-bottom:0!important}
+.dataTables_wrapper .dataTables_paginate .paginate_button{border:1px solid var(--border)!important;background:var(--card)!important;color:var(--text)!important;border-radius:10px!important;padding:6px 12px!important;margin:0 2px!important;font-weight:600;font-size:.82rem}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{background:var(--card2)!important;color:var(--text)!important}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover{background:linear-gradient(120deg,var(--p),var(--p2))!important;color:#fff!important;border-color:transparent!important}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled{opacity:.4}
 
-        .logo-box:hover img {
-            transform: scale(1.05);
-        }
+/* CELLS */
+.person{display:flex;align-items:center;gap:12px;min-width:230px}
+.av{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:.85rem;flex:none}
+.person b{display:block;font-weight:700;font-size:.88rem}
+.person small{display:block;color:var(--soft);font-weight:500;font-size:.78rem;margin-top:2px}
+.unit{min-width:210px}
+.unit b{font-weight:600;font-size:.86rem;display:block}
+.unit small{display:block;color:var(--soft);font-size:.74rem;margin-top:3px}
+.unit small s{opacity:.8}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;font-size:.74rem;font-weight:700;white-space:nowrap}
+.pill.new{background:var(--new-bg);color:var(--new)}
+.pill.same{background:var(--same-bg);color:var(--same)}
+.pill.new::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--new);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(5,150,105,.5)}70%{box-shadow:0 0 0 7px rgba(5,150,105,0)}100%{box-shadow:0 0 0 0 rgba(5,150,105,0)}}
+.campus{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.82rem}
+.campus i{color:var(--p)}
+.dim{color:var(--soft);opacity:.6}
+.wa{color:var(--p);font-weight:600}
+.wa:hover{text-decoration:underline}
+.eye{border:1px solid var(--border);background:var(--card2);color:var(--p);border-radius:9px;padding:6px 10px;cursor:pointer;font-size:.8rem}
+.eye:hover{background:var(--p);color:#fff}
+.mail{display:inline-flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--border);padding:5px 10px;border-radius:9px;font-weight:600;font-size:.8rem}
+.mail i{cursor:pointer;color:#EF4444}
 
-        .title-box h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 0;
-            letter-spacing: -0.5px;
-        }
+/* STATE */
+#state{padding:60px 0;text-align:center;color:var(--soft);font-weight:600}
+.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--border);border-top-color:var(--p);margin:0 auto 14px;animation:rot .8s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
 
-        .title-box p {
-            font-size: 0.95rem;
-            color: var(--text-soft);
-            margin: 4px 0 0;
-            font-weight: 500;
-        }
+/* FLOATING + POPUP */
+#saweria-widget{position:fixed;bottom:22px;left:22px;background:var(--card);border:1px solid var(--border);padding:8px 16px 8px 10px;border-radius:30px;box-shadow:var(--shadow);z-index:900;display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;transition:transform .2s}
+#saweria-widget:hover{transform:translateY(-2px)}
+#saweria-widget img{width:26px;height:26px;border-radius:50%;object-fit:cover}
+.popup{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px}
+.popup.hidden{display:none}
+.box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;width:460px;max-width:100%;text-align:center;box-shadow:0 25px 50px -12px rgba(0,0,0,.4);animation:up .35s ease}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.box .ico{width:56px;height:56px;margin:0 auto 14px;border-radius:16px;display:grid;place-items:center;color:#fff;font-size:1.4rem;background:linear-gradient(120deg,var(--p),var(--p2))}
+.box h2{margin:0 0 8px;font-size:1.3rem;font-weight:800}
+.box p{margin:0;color:var(--soft);font-size:.88rem;line-height:1.5}
+.box ul{text-align:left;font-size:.84rem;margin:18px 0 24px;padding-left:20px}
+.box li{margin-bottom:8px;line-height:1.45}
+.btns{display:flex;gap:10px;justify-content:center}
+.btn{border:0;border-radius:11px;padding:10px 22px;font-weight:700;font-size:.88rem;font-family:inherit;cursor:pointer;transition:.15s}
+.btn.ok{background:linear-gradient(120deg,var(--p),var(--p2));color:#fff}
+.btn.ok:hover{filter:brightness(1.1)}
+.btn.no{background:var(--card2);color:var(--soft);border:1px solid var(--border)}
 
-        .no-style {
-            background: transparent;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* DATA TABLE RESPONSIVE LAYOUT */
-        .table-responsive {
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            background: var(--card);
-            padding: 15px;
-        }
-
-        table.dataTable {
-            background: var(--card) !important;
-            color: var(--text) !important;
-            border-collapse: collapse !important;
-            width: 100% !important;
-            margin-bottom: 15px !important;
-        }
-
-        table.dataTable thead th {
-            background: var(--background) !important;
-            color: var(--text) !important;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid var(--border) !important;
-            padding: 14px 10px !important;
-        }
-
-        table.dataTable tbody td {
-            padding: 14px 10px !important;
-            border-bottom: 1px solid var(--border) !important;
-            font-size: 0.95rem;
-            vertical-align: middle;
-        }
-
-        table.dataTable tbody tr:hover td {
-            background: rgba(59, 130, 246, 0.04) !important;
-        }
-
-        /* DATATABLES DESIGN EXTENSIONS */
-        .dataTables_wrapper .dataTables_filter input {
-            background: var(--background) !important;
-            border: 1px solid var(--border) !important;
-            color: var(--text) !important;
-            border-radius: 8px !important;
-            padding: 8px 14px !important;
-            font-weight: 500;
-            font-size: 0.9rem;
-            outline: none;
-            transition: all 0.2s ease;
-            margin-left: 10px !important;
-        }
-
-        .dataTables_wrapper .dataTables_filter input:focus {
-            border-color: var(--primary) !important;
-            background: var(--card) !important;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
-        }
-
-        .dataTables_wrapper .dataTables_length select {
-            background: var(--background) !important;
-            border: 1px solid var(--border) !important;
-            border-radius: 8px !important;
-            padding: 6px 30px 6px 12px !important;
-            color: var(--text) !important;
-            font-weight: 500;
-        }
-
-        .dataTables_wrapper .dataTables_info {
-            color: var(--text-soft) !important;
-            font-weight: 500;
-            font-size: 0.85rem;
-        }
-
-        .dataTables_wrapper .dataTables_paginate {
-            padding-top: 0px !important;
-        }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            background: var(--card) !important;
-            border: 1px solid var(--border) !important;
-            color: var(--text) !important;
-            border-radius: 8px !important;
-            padding: 6px 12px !important;
-            margin: 0 3px !important;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.2s ease;
-        }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-            background: var(--background) !important;
-            border-color: var(--border) !important;
-            color: var(--text) !important;
-        }
-
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-            background: var(--primary) !important;
-            color: white !important;
-            border-color: var(--primary) !important;
-            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
-        }
-
-        /* MINIMALIST FLOATING SAWERIA WIDGET */
-        #saweria-widget {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            z-index: 9999;
-            transition: all 0.2s ease;
-        }
-
-        #saweria-widget:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-        }
-
-        #saweria-widget img {
-            width: 24px;
-            height: 24px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        #saweria-widget span {
-            margin-left: 8px;
-            font-size: 0.85rem;
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* COMPACT INTEGRITY MODAL */
-        .popup-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .popup-box {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 30px;
-            width: 440px;
-            max-width: 90%;
-            text-align: center;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .popup-box h2 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--text);
-            margin-bottom: 10px;
-        }
-
-        .popup-box p {
-            font-size: 0.9rem;
-            color: var(--text-soft);
-            line-height: 1.5;
-        }
-
-        .popup-box ul {
-            text-align: left;
-            font-size: 0.85rem;
-            color: var(--text);
-            margin: 20px 0 25px;
-            padding-left: 20px;
-        }
-
-        .popup-box ul li {
-            margin-bottom: 8px;
-            line-height: 1.4;
-        }
-
-        /* BUTTON CONTROLS */
-        .btn-success {
-            background: var(--primary);
-            color: #fff !important;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 8px 20px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-success:hover {
-            background: var(--primary-dark);
-        }
-
-        .btn-danger {
-            background: var(--background);
-            color: var(--text-soft) !important;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 8px 18px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-danger:hover {
-            background: var(--border);
-            color: var(--text) !important;
-        }
-
-        .hidden { display: none !important; }
-
-        @media (max-width: 768px) {
-            .header-area {
-                flex-direction: column;
-                text-align: center;
-            }
-            .title-box h2 { font-size: 1.35rem; }
-            .main-container { padding: 15px; margin-top: 20px; }
-            .dataTables_wrapper .d-flex {
-                flex-direction: column !important;
-                gap: 12px;
-                align-items: flex-start !important;
-            }
-            .dataTables_wrapper .dataTables_filter input {
-                margin-left: 0 !important;
-                width: 100%;
-            }
-        }
-    </style>
+@media(max-width:900px){
+  .stats{grid-template-columns:repeat(2,1fr);margin:-58px 10px 18px}
+  .filters{grid-template-columns:1fr}
+  .seg{display:flex;overflow-x:auto}
+}
+@media(max-width:600px){
+  .wrap{padding:12px}
+  .hero{padding:22px 20px 80px}
+  .hero-in{flex-wrap:wrap}.hero img{height:54px}
+  .panel{padding:14px}
+  .dataTables_filter input{min-width:0;width:100%}
+  .dataTables_filter{width:100%}.dataTables_filter label{display:block}
+}
+</style>
 </head>
 <body>
 
-    <!-- Minimalist Floating Widget -->
-    <div id="saweria-widget">
-        <a href="https://saweria.co/damz93" target="_blank" style="text-decoration: none;">
-            <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" />
-            <span>Dukung Pengembang</span>
-        </a>
+<a id="saweria-widget" href="https://saweria.co/damz93" target="_blank" rel="noopener">
+  <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" /> Dukung Pengembang
+</a>
+
+<div class="popup" id="popup">
+  <div class="box">
+    <div class="ico"><i class="fa-solid fa-shield-halved"></i></div>
+    <h2>Komitmen Integritas Data</h2>
+    <p>Untuk mengakses sistem informasi ini, Anda wajib menyetujui pakta integritas berikut:</p>
+    <ul>
+      <li>Menggunakan informasi data PNS secara bijak dan bertanggung jawab.</li>
+      <li>Tidak menyebarluaskan data pribadi kepada pihak ketiga yang tidak berwenang.</li>
+      <li>Memanfaatkan hak akses ini murni demi kebutuhan kedinasan yang sah.</li>
+      <li>Menjaga kerahasiaan kredensial dan tidak memanipulasi basis data sistem.</li>
+      <li>Mematuhi UU ITE serta regulasi perlindungan data yang berlaku di Indonesia.</li>
+    </ul>
+    <div class="btns">
+      <button class="btn ok" id="agreeBtn">Saya Setuju</button>
+      <button class="btn no" id="disagreeBtn">Kembali</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="hero-in">
+      <a href="../pns-pemkot-mks-2024" title="Kembali ke Menu Utama"><img src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Logo Makassar" /></a>
+      <div>
+        <h1>DATA PNS 2024</h1>
+        <p>Sistem Informasi Data Pegawai Negeri Sipil Pemerintah Kota Makassar</p>
+      </div>
+      <button class="theme-btn" id="themeBtn" title="Ganti tema" aria-label="Ganti tema"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><i style="background:linear-gradient(135deg,#3B82F6,#2563EB)" class="fa-solid fa-users"></i><div><b id="stTotal">–</b><span>Total PNS</span></div></div>
+    <div class="stat"><i style="background:linear-gradient(135deg,#10B981,#059669)" class="fa-solid fa-right-left"></i><div><b id="stNew">–</b><span>Satuan Kerja Baru</span></div></div>
+    <div class="stat"><i style="background:linear-gradient(135deg,#64748B,#475569)" class="fa-solid fa-building"></i><div><b id="stSame">–</b><span>Tidak Berubah</span></div></div>
+    <div class="stat"><i style="background:linear-gradient(135deg,#F59E0B,#D97706)" class="fa-solid fa-graduation-cap"></i><div><b id="stCampus">–</b><span>Kampus</span></div></div>
+  </section>
+
+  <main class="panel">
+    <div class="filters">
+      <div class="fld"><label>Status Satuan Kerja</label>
+        <div class="seg" id="seg">
+          <button class="on" data-s="all">Semua <small id="cAll"></small></button>
+          <button data-s="new">Baru <small id="cNew"></small></button>
+          <button data-s="same">Tidak Berubah <small id="cSame"></small></button>
+        </div>
+      </div>
+      <div class="fld"><label for="fUnit">Satuan Kerja</label><select id="fUnit"><option value="">Semua satuan kerja</option></select></div>
+      <div class="fld"><label for="fCampus">Kampus</label><select id="fCampus"><option value="">Semua kampus</option></select></div>
     </div>
 
-    <!-- Integrity Agreement Popup -->
-    <div class="popup-container" id="popup">
-        <div class="popup-box animate__animated animate__fadeInUp">
-            <h2>Komitmen Integritas Data</h2>
-            <p>Untuk mengakses sistem informasi ini, Anda berkewajiban menyetujui pakta integritas penggunaan data berikut:</p>
-            <ul>
-                <li>Menggunakan informasi data PNS secara bijak dan bertanggung jawab.</li>
-                <li>Tidak menyebarluaskan data pribadi kepada pihak ketiga yang tidak berwenang.</li>
-                <li>Memanfaatkan hak akses ini murni demi kebutuhan kedinasan yang sah.</li>
-                <li>Menjaga kerahasiaan kredensial dan tidak memanipulasi basis data sistem.</li>
-                <li>Mematuhui UU ITE serta regulasi perlindungan data yang berlaku di Indonesia.</li>
-            </ul>
-            <div class="d-flex justify-content-center gap-3">
-                <button class="btn btn-success" id="agreeBtn">Saya Setuju</button>
-                <button class="btn btn-danger" id="disagreeBtn">Kembali</button>
-            </div>
-        </div>
+    <div id="state"><div class="spin"></div>Memuat data pegawai...</div>
+
+    <div class="tbl-scroll" id="tblBox" style="display:none">
+      <table id="dataTable" class="hover">
+        <thead><tr>
+          <th style="width:46px">No</th><th>Pegawai</th><th>Kontak</th><th>E-Mail</th><th>Satuan Kerja</th><th>Kampus</th><th>Status</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
     </div>
+  </main>
+</div>
 
-    <!-- Main Container -->
-    <div class="container main-container animate__animated animate__fadeIn">
-        
-        <!-- Header Section -->
-        <div class="header-area">
-            <div class="logo-box">
-                <a href="../pns-pemkot-mks-2024" class="no-style">
-                    <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo">
-                </a>
-            </div>
-            <div class="title-box">
-                <h2>DATA PNS 2024</h2>
-                <p>Sistem Informasi Data Pegawai Negeri Sipil Pemerintah Kota Makassar</p>
-            </div>
-        </div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const $id = id => document.getElementById(id);
+  const popup = $id('popup');
+  $id('agreeBtn').onclick = () => popup.classList.add('hidden');
+  $id('disagreeBtn').onclick = () => location.href = 'https://bkpsdmd.makassarkota.go.id/';
 
-        <!-- Data Table Area -->
-        <div class="table-responsive">
-            <table id="dataTable" class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="text-center" style="width: 50px;">No</th>
-                        <th>Nama Lengkap</th>
-                        <th>No. Kontak</th>
-                        <th class="text-center">E-Mail Resmi</th>
-                        <th>Satuan Kerja</th>
-                        <th>Jabatan Kerja</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
+  /* Tema gelap/terang */
+  const root = document.documentElement;
+  const setTheme = t => { root.dataset.theme = t; $id('themeBtn').innerHTML = '<i class="fa-solid fa-' + (t === 'dark' ? 'sun' : 'moon') + '"></i>'; try { localStorage.setItem('pns-theme', t); } catch (e) {} };
+  let saved = null; try { saved = localStorage.getItem('pns-theme'); } catch (e) {}
+  setTheme(saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  $id('themeBtn').onclick = () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
 
-    </div>
+  /* Helper */
+  const val = (r, i) => (r.c[i] && r.c[i].v != null) ? String(r.c[i].v).trim() : '';
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const norm = s => s.toLowerCase().replace(/\s+/g, ' ').trim();
+  const dash = '<span class="dim">-</span>';
+  const initials = n => n.split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
+  const hue = n => { let h = 0; for (let i = 0; i < n.length; i++) h = (h * 31 + n.charCodeAt(i)) % 360; return h; };
+  const waLink = p => {
+    let d = p.replace(/\D/g, ''); if (!d) return '';
+    if (d[0] === '0') d = '62' + d.slice(1); else if (d[0] === '8') d = '62' + d;
+    return 'https://wa.me/' + d;
+  };
+  const fixPhone = p => (/^8\d{7,}$/.test(p) ? '0' + p : p);
 
-    <!-- Application Script Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const agreeBtn = document.getElementById('agreeBtn');
-            const disagreeBtn = document.getElementById('disagreeBtn');
-            const popup = document.getElementById('popup');
+  const sheetUrl = 'https://docs.google.com/spreadsheets/d/1pcwE1QG0zuQSgajTKFLqOjdHliTDxAwP0t11FkDR0XM/gviz/tq?tqx=out:json';
 
-            agreeBtn.onclick = () => popup.classList.add('hidden');
-            disagreeBtn.onclick = () => window.location.href = "https://bkpsdmd.makassarkota.go.id/";
+  $.get(sheetUrl).done(function (data) {
+    const m = String(data).match(/google\.visualization\.Query\.setResponse\((.*)\);/);
+    if (!m) return fail();
 
-            const sheetUrl = "https://docs.google.com/spreadsheets/d/1pcwE1QG0zuQSgajTKFLqOjdHliTDxAwP0t11FkDR0XM/gviz/tq?tqx=out:json";
+    /* Kolom: 1 Email | 2 Nama | 3 Phone | 5 Jabatan | 6 Satuan Kerja | 10 Satuan Kerja Baru | 11 Kampus */
+    const rows = JSON.parse(m[1]).table.rows.filter(r => r && r.c).map(r => {
+      const o = {
+        nama: val(r, 2), phone: fixPhone(val(r, 3)), email: val(r, 1), jabatan: val(r, 5),
+        lama: val(r, 6), baru: val(r, 10), kampus: val(r, 11)
+      };
+      o.isNew = !!o.baru && norm(o.baru) !== norm(o.lama);
+      o.unit = o.baru || o.lama;
+      return o;
+    }).filter(o => o.nama).sort((a, b) => a.unit.localeCompare(b.unit) || a.nama.localeCompare(b.nama));
 
-            $.get(sheetUrl, function(data) {
-                let jsonData = data.match(/google\.visualization\.Query\.setResponse\((.*)\);/);
-                if (jsonData && jsonData[1]) {
-                    let sheetData = JSON.parse(jsonData[1]).table.rows;
-                    let formattedData = sheetData.map((r,i)=>({
-                        noper:r.c[9]?r.c[9].v:"",
-                        nama:r.c[2]?r.c[2].v:"",
-                        phone:r.c[3]?r.c[3].v:"",
-                        email:r.c[1]?r.c[1].v:"",
-                        satuanKerja:r.c[6]?r.c[6].v:"",
-                        jabatan:r.c[5]?r.c[5].v:""
-                    })).sort((a,b)=>{
-                        let sk=a.satuanKerja.localeCompare(b.satuanKerja);
-                        return sk!==0?sk:a.jabatan.localeCompare(b.jabatan);
-                    });
+    /* Statistik */
+    const nNew = rows.filter(r => r.isNew).length;
+    const campuses = [...new Set(rows.map(r => r.kampus).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    const units = [...new Set(rows.map(r => r.unit).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    $id('stTotal').textContent = rows.length.toLocaleString('id-ID');
+    $id('stNew').textContent = nNew.toLocaleString('id-ID');
+    $id('stSame').textContent = (rows.length - nNew).toLocaleString('id-ID');
+    $id('stCampus').textContent = campuses.length;
+    $id('cAll').textContent = rows.length; $id('cNew').textContent = nNew; $id('cSame').textContent = rows.length - nNew;
+    units.forEach(u => $('#fUnit').append($('<option>').val(u).text(u)));
+    campuses.forEach(c => $('#fCampus').append($('<option>').val(c).text(c)));
 
-                    formattedData.forEach((row, index)=>{
-                        $("#dataTable tbody").append(`
-                            <tr>
-                                <td class='text-center' style="color: var(--text-soft); font-weight: 500;">${index+1}</td>
-                                <td style="font-weight:600; color:var(--text);">${row.nama.toUpperCase()}</td>
-                                <td style="font-weight:500; color:var(--text-soft);">${row.phone}</td>
-                                <td style='text-align:center'>
-                                    <span class="email-container" data-email="${row.email.toLowerCase()}">
-                                        <i class="fa-regular fa-eye toggle-email" style="cursor:pointer; color:var(--primary); font-size:1rem;"></i>
-                                    </span>
-                                </td>
-                                <td style="font-weight:500; color:var(--text-soft);">${row.satuanKerja}</td>
-                                <td style="font-weight:500; color:var(--text-soft);">${row.jabatan}</td>
-                            </tr>
-                        `);
-                    });
+    /* Filter kustom (exact match) */
+    const F = { s: 'all', unit: '', campus: '' };
+    $.fn.dataTable.ext.search.push((settings, _d, _i, row) => {
+      if (settings.nTable.id !== 'dataTable') return true;
+      if (F.s === 'new' && !row.isNew) return false;
+      if (F.s === 'same' && row.isNew) return false;
+      if (F.unit && row.unit !== F.unit) return false;
+      if (F.campus && row.kampus !== F.campus) return false;
+      return true;
+    });
 
-                    // Inisialisasi DataTable Premium & Clean Look
-                    let table = $('#dataTable').DataTable({ 
-                        pageLength: 10,
-                        dom: '<"d-flex justify-content-between align-items-center mb-3"l f>rt<"d-flex justify-content-between align-items-center mt-3"i p>',
-                        language: {
-                            search: "",
-                            searchPlaceholder: "Cari data pegawai...",
-                            lengthMenu: "Tampilkan _MENU_ baris",
-                            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data PNS",
-                            paginate: {
-                                next: "<i class='fa fa-chevron-right'></i>",
-                                previous: "<i class='fa fa-chevron-left'></i>"
-                            }
-                        }
-                    });
+    $id('state').style.display = 'none';
+    $id('tblBox').style.display = '';
 
-                    // Handler Minimalist Toggle Email
-                    $(document).on("click", ".toggle-email", function(){
-                        let $t = $(this);
-                        let emailContainer = $t.closest(".email-container");
-                        let email = emailContainer.attr("data-email");
-                        
-                        if($t.hasClass("fa-eye-slash")){
-                            emailContainer.html('<i class="fa-regular fa-eye toggle-email" style="cursor:pointer; color:var(--primary); font-size:1rem;"></i>');
-                        } else {
-                            // Reset state email lain yang sedang terbuka agar tetap rapi
-                            $(".email-container").each(function() {
-                                let currentContainer = $(this);
-                                if (currentContainer.find(".fa-eye-slash").length > 0) {
-                                    currentContainer.html('<i class="fa-regular fa-eye toggle-email" style="cursor:pointer; color:var(--primary); font-size:1rem;"></i>');
-                                }
-                            });
-                            // Buka email yang dipilih
-                            emailContainer.html(`<span style="color:var(--text); font-weight:600; font-size:0.85rem; margin-right:8px; background:var(--background); padding:4px 8px; border-radius:6px; border: 1px solid var(--border);">${email}</span><i class="fa fa-eye-slash toggle-email" style="cursor:pointer; color:#ef4444; font-size:1rem; vertical-align:middle;"></i>`);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+    /* DataTable: render per halaman saja (deferRender) supaya ringan */
+    const table = $('#dataTable').DataTable({
+      data: rows,
+      deferRender: true,
+      pageLength: 10,
+      order: [[4, 'asc']],
+      autoWidth: false,
+      dom: '<"toolbar"lf>rt<"foot"ip>',
+      language: {
+        search: '', searchPlaceholder: 'Cari nama, jabatan, satuan kerja...',
+        lengthMenu: 'Tampilkan _MENU_', info: 'Menampilkan _START_–_END_ dari _TOTAL_ data PNS',
+        infoEmpty: 'Tidak ada data', infoFiltered: '(disaring dari _MAX_ data)', zeroRecords: 'Data tidak ditemukan',
+        paginate: { next: '<i class="fa fa-chevron-right"></i>', previous: '<i class="fa fa-chevron-left"></i>' }
+      },
+      columns: [
+        { data: null, orderable: false, searchable: false, render: () => '' },
+        { data: 'nama', render: (d, t, r) => t !== 'display' ? d + ' ' + r.jabatan :
+            `<div class="person"><div class="av" style="background:linear-gradient(135deg,hsl(${hue(d)} 70% 52%),hsl(${(hue(d) + 40) % 360} 70% 42%))">${esc(initials(d))}</div>
+             <div><b>${esc(d.toUpperCase())}</b><small>${r.jabatan ? esc(r.jabatan) : '-'}</small></div></div>` },
+        { data: 'phone', render: (d, t) => {
+            if (t !== 'display') return d;
+            const l = waLink(d); return !d ? dash : l ? `<a class="wa" href="${l}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> ${esc(d)}</a>` : esc(d); } },
+        { data: 'email', orderable: false, searchable: false, render: (d, t) => t !== 'display' ? '' :
+            (d ? '<button class="eye" data-act="show" title="Tampilkan e-mail"><i class="fa-regular fa-eye"></i></button>' : dash) },
+        { data: 'unit', render: (d, t, r) => t !== 'display' ? d + ' ' + r.lama :
+            `<div class="unit"><b>${d ? esc(d) : '-'}</b>${r.isNew ? `<small>dari <s>${r.lama ? esc(r.lama) : '-'}</s></small>` : ''}</div>` },
+        { data: 'kampus', render: (d, t) => t !== 'display' ? d : (d ? `<span class="campus"><i class="fa-solid fa-graduation-cap"></i>${esc(d)}</span>` : dash) },
+        { data: 'isNew', render: (d, t) => t !== 'display' ? (d ? 'baru' : 'tetap') :
+            (d ? '<span class="pill new">Satuan Kerja Baru</span>' : '<span class="pill same">Tidak Berubah</span>') }
+      ]
+    });
+
+    /* Nomor urut mengikuti urutan tampil */
+    table.on('draw.dt', function () {
+      const start = table.page.info().start;
+      table.column(0, { page: 'current' }).nodes().each((c, i) => { c.textContent = start + i + 1; });
+    }).draw();
+
+    /* Kontrol filter */
+    $('#seg').on('click', 'button', function () {
+      $('#seg button').removeClass('on'); $(this).addClass('on');
+      F.s = this.dataset.s; table.draw();
+    });
+    $('#fUnit').on('change', function () { F.unit = this.value; table.draw(); });
+    $('#fCampus').on('change', function () { F.campus = this.value; table.draw(); });
+
+    /* Tampilkan/sembunyikan e-mail (delegasi event, data diambil dari baris) */
+    $('#dataTable tbody').on('click', '[data-act]', function () {
+      const td = $(this).closest('td');
+      const row = table.row($(this).closest('tr')).data();
+      if (this.dataset.act === 'show') {
+        $('#dataTable [data-act=hide]').each(function () { $(this).closest('td').html('<button class="eye" data-act="show" title="Tampilkan e-mail"><i class="fa-regular fa-eye"></i></button>'); });
+        td.html(`<span class="mail">${esc(row.email.toLowerCase())}<i class="fa-solid fa-eye-slash" data-act="hide" title="Sembunyikan"></i></span>`);
+      } else {
+        td.html('<button class="eye" data-act="show" title="Tampilkan e-mail"><i class="fa-regular fa-eye"></i></button>');
+      }
+    });
+  }).fail(fail);
+
+  function fail() {
+    $id('state').innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#F59E0B"></i><br><br>Data gagal dimuat. Pastikan sheet dibagikan "Anyone with the link" lalu muat ulang halaman.';
+  }
+});
+</script>
 </body>
 </html>
