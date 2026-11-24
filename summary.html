@@ -29,6 +29,20 @@
 .flows li{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:8px 12px}
 .flows li span{flex:1;min-width:0}.flows li b{color:var(--new)}.flows i{color:var(--soft);font-size:.7rem}
 .mini{display:flex;gap:6px}.mini .chip{padding:5px 11px;font-size:.74rem}
+dialog.big{width:min(720px,calc(100% - 24px));max-height:86vh;padding:0}
+dialog.big[open]{display:flex;flex-direction:column}
+.mh{padding:20px 22px 12px;border-bottom:1px solid var(--border)}
+.mh small{color:var(--soft);font-weight:700;font-size:.7rem;text-transform:uppercase;letter-spacing:.5px}
+.mh h2{margin:2px 0 10px;padding-right:36px}
+.mh .x{position:absolute;right:16px;top:16px;width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--soft);cursor:pointer}
+.mh input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-family:inherit;font-size:.88rem;outline:none}
+#mC{padding:10px 22px 0;color:var(--soft);font-size:.8rem;font-weight:600}
+#mL{overflow:auto;padding:8px 22px 20px}
+.mrow{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);content-visibility:auto;contain-intrinsic-size:auto 64px}
+.mrow .mn{flex:none;width:28px;color:var(--soft);font-size:.78rem;font-weight:600;padding-top:2px}
+.mrow b{display:block;font-size:.86rem}.mrow small{display:block;color:var(--soft);font-size:.78rem;margin-top:2px;font-weight:500}
+.mrow .st-new{background:var(--new-bg);color:var(--new);padding:2px 8px;font-size:.68rem}
+.cv canvas{cursor:pointer}
 @media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr);margin:-58px 10px 16px}.g2{grid-template-columns:1fr}}
 </style>
 </head>
@@ -52,7 +66,7 @@
   <div id="state" class="state"><div class="spin"></div>Memuat data...</div>
   <div id="app" hidden>
     <div class="g2">
-      <section class="panel card"><h2>Rekap Perpindahan</h2><p class="sub" id="movSub"></p><div class="cv"><canvas id="cMov"></canvas></div><ul class="flows" id="flows"></ul></section>
+      <section class="panel card"><h2>Rekap Perpindahan <i class="fa-solid fa-hand-pointer" style="font-size:.7rem;color:var(--soft)" title="Klik grafik untuk melihat daftar"></i></h2><p class="sub" id="movSub"></p><div class="cv"><canvas id="cMov"></canvas></div><ul class="flows" id="flows"></ul></section>
       <section class="panel card"><h2>Rekap Jenis Kelamin</h2><p class="sub" id="genSub"></p><div class="cv" id="genBox"><canvas id="cGen"></canvas></div></section>
     </div>
 
@@ -73,6 +87,12 @@
   </div>
 </div>
 
+<dialog id="dlg" class="big">
+  <div class="mh"><small id="mK"></small><h2 id="mT"></h2><button class="x" id="mX" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+    <input id="mQ" type="search" placeholder="Cari nama, jabatan, satuan kerja..." autocomplete="off" /></div>
+  <div id="mC"></div><div id="mL"></div>
+</dialog>
+
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); }, esc = PNS.esc;
@@ -86,11 +106,11 @@
     var j = JSON.parse(m[1]).table, lb = j.cols.map(function (c) { return (c.label || '').toLowerCase().trim(); });
     var ix = function (re, fb) { var i = lb.findIndex(function (l) { return re.test(l); }); return i < 0 ? fb : i; };
     var cLama = lb.indexOf('satuan kerja'); if (cLama < 0) cLama = 6;
-    var cBaru = ix(/satuan kerja baru/, 10), cKam = ix(/kampus/, 11), cJK = ix(/kelamin|gender|^jk$/, -1), cNama = ix(/^nama/, 2);
+    var cBaru = ix(/satuan kerja baru/, 10), cKam = ix(/kampus/, 11), cJK = ix(/kelamin|gender|^jk$/, -1), cNama = ix(/^nama/, 2), cJab = ix(/jabatan/, 5);
     var v = function (r, i) { return i >= 0 && r.c[i] && r.c[i].v != null ? String(r.c[i].v).trim() : ''; };
 
     var rows = j.rows.filter(function (r) { return r && r.c && v(r, cNama); }).map(function (r) {
-      var o = { lama: v(r, cLama), baru: v(r, cBaru), kampus: v(r, cKam), jk: v(r, cJK) };
+      var o = { nama: v(r, cNama), jab: v(r, cJab), lama: v(r, cLama), baru: v(r, cBaru), kampus: v(r, cKam), jk: v(r, cJK) };
       o.isNew = !!o.baru && norm(o.baru) !== norm(o.lama); o.unit = o.baru || o.lama;
       var g = o.jk.toLowerCase();
       o.g = !g ? '' : /^(l\b|laki|pria|male|m\b)/.test(g) ? 'Laki-laki' : /^(p\b|perempuan|wanita|female|f\b)/.test(g) ? 'Perempuan' : 'Lainnya';
@@ -115,7 +135,40 @@
   }
 
   function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
-  function mk(id, cfg) { if (charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
+  function mk(id, cfg) {
+    if (charts[id]) charts[id].destroy();
+    cfg.options.onClick = function (e, els, ch) { if (els.length) openList(id, ch.data.labels[els[0].index]); };
+    cfg.options.onHover = function (e, els) { e.native.target.style.cursor = els.length ? 'pointer' : 'default'; };
+    charts[id] = new Chart($(id), cfg);
+  }
+  /* Modal daftar anggota dari bagian grafik yang diklik */
+  var cur = [];
+  function members(id, label) {
+    var R = D.rows;
+    return R.filter(function (r) {
+      if (id === 'cMov') return label === 'Satuan kerja baru' ? r.isNew : !r.isNew;
+      if (id === 'cGen') return r.g === label;
+      if (id === 'cCam') return r.kampus === label;
+      return (S.unitMode === 'baru' ? r.unit : r.lama) === label;
+    });
+  }
+  var TITLE = { cMov: 'Perpindahan', cGen: 'Jenis Kelamin', cCam: 'Kampus', cUnit: 'Satuan Kerja' };
+  function openList(id, label) {
+    cur = members(id, label).sort(function (a, b) { return a.nama.localeCompare(b.nama); });
+    $('mT').textContent = label; $('mK').textContent = TITLE[id]; $('mQ').value = ''; renderList(''); $('dlg').showModal();
+  }
+  function renderList(q) {
+    var out = q ? cur.filter(function (r) { return (r.nama + ' ' + r.jab + ' ' + r.unit + ' ' + r.kampus).toLowerCase().indexOf(q) > -1; }) : cur, LIM = 300;
+    $('mC').textContent = out.length + ' PNS' + (out.length > LIM ? ' · menampilkan ' + LIM + ' pertama, gunakan pencarian' : '');
+    $('mL').innerHTML = out.slice(0, LIM).map(function (r, i) {
+      return '<div class="mrow"><span class="mn">' + (i + 1) + '</span><div><b>' + esc(r.nama.toUpperCase()) + '</b><small>' + esc(r.jab || '-') + '</small>' +
+        '<small><i class="fa-solid fa-building"></i> ' + esc(r.unit || '-') + (r.isNew ? ' <span class="pill st-new">dari ' + esc(r.lama || '-') + '</span>' : '') +
+        (r.kampus ? ' · <i class="fa-solid fa-graduation-cap"></i> ' + esc(r.kampus) : '') + '</small></div></div>';
+    }).join('') || '<div class="state">Tidak ada data.</div>';
+  }
+  var tmq; $('mQ').addEventListener('input', function () { var v = this.value.toLowerCase().trim(); clearTimeout(tmq); tmq = setTimeout(function () { renderList(v); }, 120); });
+  $('mX').onclick = function () { $('dlg').close(); };
+  $('dlg').addEventListener('click', function (e) { if (e.target === this) this.close(); });
   function donut(id, data, colors) {
     mk(id, { type: 'doughnut', data: { labels: data.map(function (d) { return d[0]; }), datasets: [{ data: data.map(function (d) { return d[1]; }), backgroundColor: colors, borderColor: css('--card'), borderWidth: 3 }] },
       options: { maintainAspectRatio: false, cutout: '66%', plugins: { legend: { position: 'bottom', labels: { color: css('--soft'), font: { family: 'Plus Jakarta Sans', weight: 600 }, usePointStyle: true } } } } });

@@ -12,34 +12,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
+<link rel="stylesheet" href="assets/theme.css" />
+<script src="assets/theme.js"></script>
 <style>
-:root{
-  --bg:#F1F5F9; --card:#fff; --card2:#F8FAFC; --text:#0F172A; --soft:#64748B; --border:#E2E8F0;
-  --p:#2563EB; --p2:#4F46E5; --new:#059669; --new-bg:#D1FAE5; --same:#64748B; --same-bg:#E2E8F0;
-  --shadow:0 10px 30px -12px rgba(15,23,42,.18);
-}
-[data-theme=dark]{
-  --bg:#0B1220; --card:#111A2E; --card2:#16213A; --text:#E5E7EB; --soft:#94A3B8; --border:#22304D;
-  --new:#34D399; --new-bg:rgba(52,211,153,.15); --same:#94A3B8; --same-bg:rgba(148,163,184,.15);
-  --shadow:0 10px 30px -12px rgba(0,0,0,.6);
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding-bottom:90px;transition:background .25s}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:1360px;margin:0 auto;padding:20px}
 
-/* HERO */
-.hero{position:relative;overflow:hidden;border-radius:24px;padding:34px 34px 90px;color:#fff;background:linear-gradient(120deg,#1D4ED8 0%,#4F46E5 55%,#7C3AED 100%);box-shadow:var(--shadow)}
-.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.08)}
-.hero::before{width:320px;height:320px;right:-80px;top:-120px}
-.hero::after{width:200px;height:200px;right:180px;bottom:-110px}
-.hero-in{position:relative;z-index:1;display:flex;align-items:center;gap:20px}
-.hero img{height:70px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.25));transition:transform .2s}
-.hero a:hover img{transform:scale(1.06)}
-.hero h1{margin:0;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:800;letter-spacing:-.5px}
-.hero p{margin:6px 0 0;opacity:.85;font-weight:500;font-size:.95rem}
-.theme-btn{margin-left:auto;width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;font-size:1rem;backdrop-filter:blur(6px)}
-.theme-btn:hover{background:rgba(255,255,255,.25)}
 
 /* STATS */
 .stats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:-58px 22px 22px}
@@ -49,7 +25,6 @@ a{color:inherit;text-decoration:none}
 .stat span{font-size:.75rem;color:var(--soft);font-weight:600;text-transform:uppercase;letter-spacing:.4px}
 
 /* PANEL */
-.panel{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow)}
 .filters{display:grid;grid-template-columns:auto 1fr 1fr;gap:14px;align-items:end;margin-bottom:18px}
 .seg{display:inline-flex;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:4px;gap:2px}
 .seg button{border:0;background:transparent;color:var(--soft);font-weight:600;font-size:.82rem;font-family:inherit;padding:8px 14px;border-radius:9px;cursor:pointer;white-space:nowrap;transition:.15s}
@@ -104,13 +79,8 @@ table.dataTable.no-footer{border-bottom:0!important}
 
 /* STATE */
 #state{padding:60px 0;text-align:center;color:var(--soft);font-weight:600}
-.spin{width:38px;height:38px;border-radius:50%;border:4px solid var(--border);border-top-color:var(--p);margin:0 auto 14px;animation:rot .8s linear infinite}
-@keyframes rot{to{transform:rotate(360deg)}}
 
 /* FLOATING + POPUP */
-#saweria-widget{position:fixed;bottom:22px;left:22px;background:var(--card);border:1px solid var(--border);padding:8px 16px 8px 10px;border-radius:30px;box-shadow:var(--shadow);z-index:900;display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;transition:transform .2s}
-#saweria-widget:hover{transform:translateY(-2px)}
-#saweria-widget img{width:26px;height:26px;border-radius:50%;object-fit:cover}
 .popup{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;z-index:9999;padding:16px}
 .popup.hidden{display:none}
 .box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:30px;width:460px;max-width:100%;text-align:center;box-shadow:0 25px 50px -12px rgba(0,0,0,.4);animation:up .35s ease}
@@ -120,11 +90,6 @@ table.dataTable.no-footer{border-bottom:0!important}
 .box p{margin:0;color:var(--soft);font-size:.88rem;line-height:1.5}
 .box ul{text-align:left;font-size:.84rem;margin:18px 0 24px;padding-left:20px}
 .box li{margin-bottom:8px;line-height:1.45}
-.btns{display:flex;gap:10px;justify-content:center}
-.btn{border:0;border-radius:11px;padding:10px 22px;font-weight:700;font-size:.88rem;font-family:inherit;cursor:pointer;transition:.15s}
-.btn.ok{background:linear-gradient(120deg,var(--p),var(--p2));color:#fff}
-.btn.ok:hover{filter:brightness(1.1)}
-.btn.no{background:var(--card2);color:var(--soft);border:1px solid var(--border)}
 
 @media(max-width:900px){
   .stats{grid-template-columns:repeat(2,1fr);margin:-58px 10px 18px}
@@ -132,11 +97,8 @@ table.dataTable.no-footer{border-bottom:0!important}
   .seg{display:flex;overflow-x:auto}
 }
 @media(max-width:600px){
-  .wrap{padding:12px}
-  .hero{padding:22px 20px 80px}
-  .hero-in{flex-wrap:wrap}.hero img{height:54px}
-  .panel{padding:14px}
-  .dataTables_filter input{min-width:0;width:100%}
+  
+    .dataTables_filter input{min-width:0;width:100%}
   .dataTables_filter{width:100%}.dataTables_filter label{display:block}
 }
 </style>
@@ -147,7 +109,7 @@ table.dataTable.no-footer{border-bottom:0!important}
   <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" /> Dukung Pengembang
 </a>
 
-<div class="popup" id="popup">
+<div class="popup" id="popup" role="dialog" aria-modal="true">
   <div class="box">
     <div class="ico"><i class="fa-solid fa-shield-halved"></i></div>
     <h2>Komitmen Integritas Data</h2>
@@ -166,7 +128,7 @@ table.dataTable.no-footer{border-bottom:0!important}
   </div>
 </div>
 
-<div class="wrap">
+<div class="wrap wide">
   <header class="hero">
     <div class="hero-in">
       <a href="../pns-pemkot-mks-2024" title="Kembali ke Menu Utama"><img src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Logo Makassar" /></a>
@@ -174,7 +136,7 @@ table.dataTable.no-footer{border-bottom:0!important}
         <h1>DATA PNS 2024</h1>
         <p>Sistem Informasi Data Pegawai Negeri Sipil Pemerintah Kota Makassar</p>
       </div>
-      <button class="theme-btn" id="themeBtn" title="Ganti tema" aria-label="Ganti tema"><i class="fa-solid fa-moon"></i></button>
+      <button class="theme-btn" data-theme-toggle title="Ganti tema" aria-label="Ganti tema"><i class="fa-solid fa-moon"></i></button>
     </div>
   </header>
 
@@ -217,13 +179,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const popup = $id('popup');
   $id('agreeBtn').onclick = () => popup.classList.add('hidden');
   $id('disagreeBtn').onclick = () => location.href = 'https://bkpsdmd.makassarkota.go.id/';
-
-  /* Tema gelap/terang */
-  const root = document.documentElement;
-  const setTheme = t => { root.dataset.theme = t; $id('themeBtn').innerHTML = '<i class="fa-solid fa-' + (t === 'dark' ? 'sun' : 'moon') + '"></i>'; try { localStorage.setItem('pns-theme', t); } catch (e) {} };
-  let saved = null; try { saved = localStorage.getItem('pns-theme'); } catch (e) {}
-  setTheme(saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
-  $id('themeBtn').onclick = () => setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
 
   /* Helper */
   const val = (r, i) => (r.c[i] && r.c[i].v != null) ? String(r.c[i].v).trim() : '';
