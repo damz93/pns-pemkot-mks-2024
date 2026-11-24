@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<title>Segala Hal Tentang PNS Pemkot MKS 2024 | By Dedy A Muzawwir</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="assets/theme.css" />
+<script src="assets/theme.js"></script>
+</head>
+<body class="has-ticker">
+<a id="saweria-widget" href="https://saweria.co/damz93" target="_blank" rel="noopener"><img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" /> Recehan Kak 💖</a>
+
+<div class="wrap">
+  <header class="hero center">
+    <div class="hero-in">
+      <button class="theme-btn" data-theme-toggle title="Ganti tema" aria-label="Ganti tema"></button>
+      <a href="https://damz93.github.io/pns-pemkot-mks-2024/"><img src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Logo Pemkot Makassar" /></a>
+      <h1 class="caret" id="typing" aria-label="Cari apaki, ces?"></h1>
+      <p>Pusat informasi PNS Pemerintah Kota Makassar 2024</p>
+    </div>
+  </header>
+
+  <main class="panel lift">
+    <nav class="tiles">
+      <a class="tile" href="https://damz93.github.io/pns-pemkot-mks-2024/data"><i class="go fa-solid fa-arrow-right"></i>
+        <span class="ic" style="background:linear-gradient(135deg,#3B82F6,#2563EB)"><i class="fa-solid fa-id-card-clip"></i></span>
+        <b>Daftar PNS</b><small>Cari pegawai, kontak, satuan kerja, dan kampus.</small></a>
+      <a class="tile" href="https://damz93.github.io/pns-pemkot-mks-2024/summary"><i class="go fa-solid fa-arrow-right"></i>
+        <span class="ic" style="background:linear-gradient(135deg,#EC4899,#DB2777)"><i class="fa-solid fa-chart-pie"></i></span>
+        <b>Summary</b><small>Rekap kampus, satuan kerja, perpindahan, dan jenis kelamin.</small></a>
+      <a class="tile" href="https://damz93.github.io/pns-pemkot-mks-2024/event"><i class="go fa-solid fa-arrow-right"></i>
+        <span class="ic" style="background:linear-gradient(135deg,#10B981,#059669)"><i class="fa-regular fa-calendar-check"></i></span>
+        <b>Kalender Event</b><small>Ulang tahun dan agenda penting rekan-rekan.</small></a>
+      <a class="tile" href="https://damz93.github.io/pns-pemkot-mks-2024/faq"><i class="go fa-solid fa-arrow-right"></i>
+        <span class="ic" style="background:linear-gradient(135deg,#F59E0B,#D97706)"><i class="fa-regular fa-comments"></i></span>
+        <b>FAQ</b><small>Tanya jawab seputar kepegawaian.</small></a>
+      <a class="tile" href="https://damz93.github.io/pns-pemkot-mks-2024/istilah"><i class="go fa-solid fa-arrow-right"></i>
+        <span class="ic" style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)"><i class="fa-solid fa-spell-check"></i></span>
+        <b>Istilah</b><small>Kamus singkatan dan istilah PNS.</small></a>
+    </nav>
+  </main>
+</div>
+
+<footer class="ticker"><div class="tag"><i class="fa-solid fa-bullhorn"></i> INFO</div>
+  <div class="roll"><span id="tick">Memuat informasi...</span></div></footer>
+
+<script>
+(function () {
+  /* Efek mengetik */
+  var t = "Cari apaki, ces? 🔥", el = document.getElementById('typing'), i = 0;
+  (function type() { if (i <= t.length) { el.textContent = t.slice(0, i++); setTimeout(type, 90); } })();
+
+  /* Ticker dari Google Sheets */
+  var URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSvEzh0Ps5yeM9uGO5vuubyRlI2ZQQXbBqIQ-r6pwWopnu3XkI5ajEvrK13cmLCa2UlfyJ4xrWMQDKs/pub?gid=598428421&single=true&output=csv";
+  var msgs = [], span = document.getElementById('tick');
+  function show() {
+    if (!msgs.length) return;
+    var m = msgs[Math.floor(Math.random() * msgs.length)];
+    span.textContent = m;
+    span.style.animationDuration = Math.max(15, m.length * 0.22 + 10) + 's';
+  }
+  function load() {
+    fetch(URL).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (txt) {
+      msgs = PNS.csv(txt).filter(function (r) { return r[0] !== 'Timestamp'; }).map(function (r) {
+        var a = (r[1] || '').trim(), b = (r[2] || '').trim();
+        return a ? (b ? '"' + a + '" — ' + b : a) : '';
+      }).filter(Boolean);
+      if (msgs.length) show(); else span.textContent = 'Belum ada informasi saat ini.';
+    }).catch(function () { span.textContent = 'Gagal memuat informasi terbaru.'; });
+  }
+  span.addEventListener('animationiteration', show);
+  load(); setInterval(load, 150000);
+})();
+</script>
+</body>
+</html>

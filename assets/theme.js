@@ -8,7 +8,7 @@
       b.innerHTML = '<i class="fa-solid fa-' + (d.dataset.theme === 'dark' ? 'sun' : 'moon') + '"></i>';
     });
   }
-  var NAV = [['summary','Summary','fa-chart-pie'],['data','Daftar PNS','fa-id-card-clip'],['event','Kalender','fa-calendar-check'],['faq','FAQ','fa-comments'],['istilah','Istilah','fa-spell-check']];
+  var NAV = [['index','Summary','fa-chart-pie'],['data','Daftar PNS','fa-id-card-clip'],['event','Kalender','fa-calendar-check'],['faq','FAQ','fa-comments'],['istilah','Istilah','fa-spell-check']];
   var LOGO = 'https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png';
   function buildNav() {
     var cur = (location.pathname.split('/').pop() || 'index').replace(/\.html$/, '') || 'index';
