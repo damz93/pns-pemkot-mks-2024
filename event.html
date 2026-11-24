@@ -1,301 +1,164 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Kalender Event | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
-    <link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/x-icon">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    <style>
-        :root {
-            --primary: #3B82F6;
-            --primary-dark: #2563EB;
-            --secondary: #60A5FA;
-            --background: #F8FAFC;
-            --card: #FFFFFF;
-            --text: #1E293B;
-            --text-soft: #64748B;
-            --border: #E2E8F0;
-            --accent-bg: rgba(59, 130, 246, 0.05);
-        }
-
-        body {
-            background-color: var(--background);
-            min-height: 100vh;
-            margin: 0;
-            padding-bottom: 80px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            color: var(--text);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        /* MAIN APP BOX CONTAINER */
-        .main-container {
-            width: 100%;
-            max-width: 900px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            padding: 30px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-
-        /* NEO GOV HEADER */
-        .header-area {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 25px;
-            margin-bottom: 25px;
-        }
-
-        .logo-box img {
-            height: 65px;
-            width: auto;
-            transition: transform 0.2s ease;
-        }
-
-        .logo-box:hover img {
-            transform: scale(1.05);
-        }
-
-        .title-box h2 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 0;
-            letter-spacing: -0.5px;
-        }
-
-        .title-box p {
-            font-size: 0.95rem;
-            color: var(--text-soft);
-            margin: 4px 0 0;
-            font-weight: 500;
-        }
-
-        .no-style {
-            background: transparent;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* LIVE SEARCH INPUT */
-        .form-control {
-            width: 100%;
-            padding: 14px 16px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--background);
-            color: var(--text) !important;
-            outline: none;
-            box-shadow: none;
-            transition: all 0.2s ease;
-            margin-bottom: 25px;
-        }
-
-        .form-control::placeholder {
-            color: var(--text-soft);
-            font-weight: 400;
-        }
-
-        .form-control:focus {
-            border-color: var(--primary);
-            background: var(--card);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-        }
-
-        /* DYNAMIC INJECTED CARD FORCING (event/script.js Overrides) */
-        #eventList .card {
-            background: var(--card) !important;
-            border: 1px solid var(--border) !important;
-            border-radius: 12px !important;
-            padding: 20px !important;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01) !important;
-            transition: all 0.2s ease !important;
-            color: var(--text) !important;
-        }
-
-        #eventList .card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04) !important;
-            border-color: var(--secondary) !important;
-            transform: translateY(-2px);
-        }
-
-        /* MINIMALIST FLOATING SAWERIA WIDGET */
-        #saweria-widget {
-            position: fixed;
-            bottom: 25px;
-            left: 25px;
-            background: var(--card);
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            z-index: 9999;
-            transition: all 0.2s ease;
-        }
-
-        #saweria-widget:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-        }
-
-        #saweria-widget a {
-            text-decoration: none;
-            color: var(--text);
-            display: flex;
-            align-items: center;
-        }
-
-        #saweria-widget img {
-            width: 24px;
-            height: 24px;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        #saweria-widget span {
-            margin-left: 8px;
-            font-size: 0.85rem;
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* NEO GOVERNMENT CLEAN MODAL */
-        .modal-content {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            color: var(--text);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .modal-header {
-            border-bottom: 1px solid var(--border);
-            padding: 20px;
-        }
-
-        .modal-header h5 {
-            font-weight: 800;
-            font-size: 1.25rem;
-            color: var(--text);
-        }
-
-        .modal-body {
-            padding: 24px;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--text);
-        }
-
-        #modalDescription {
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        #modalTime {
-            background: var(--accent-bg);
-            color: var(--primary-dark) !important;
-            padding: 10px 14px;
-            border-left: 3px solid var(--primary);
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-radius: 0 6px 6px 0;
-            margin-top: 15px;
-        }
-
-        .btn-close {
-            filter: none;
-        }
-
-        /* FIREWORKS CANVAS */
-        canvas#fireworksCanvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .header-area {
-                flex-direction: column;
-                text-align: center;
-            }
-            .title-box h2 { font-size: 1.35rem; }
-            .main-container { padding: 20px; margin-top: 20px; }
-            #saweria-widget { bottom: 20px; left: 15px; }
-        }
-    </style>
+<title>Kalender Event | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="assets/theme.css" />
+<script src="assets/theme.js"></script>
+<style>
+.evs{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.ev{position:relative;display:flex;flex-direction:column;gap:8px;padding:18px;border:1px solid var(--border);border-radius:18px;background:var(--card);cursor:pointer;transition:.2s}
+.ev:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--p)}
+.ev.bday{border:2px solid #F59E0B;background:linear-gradient(180deg,rgba(245,158,11,.08),transparent 60%),var(--card)}
+.ev h3{margin:0;font-size:1rem;font-weight:800;line-height:1.35;padding-right:30px}
+.ev p{margin:0;color:var(--soft);font-size:.85rem;line-height:1.5}
+.ev .meta{font-size:.78rem;font-weight:600;color:var(--soft)}
+.ev .cd{margin-top:auto;font-weight:800;font-size:.85rem;font-variant-numeric:tabular-nums}
+.ev .wa{position:absolute;right:14px;top:14px;color:#25D366;font-size:1.3rem}
+.st-now{background:var(--new-bg);color:var(--new)}.st-soon{background:rgba(245,158,11,.14);color:#D97706}.st-done{background:var(--same-bg);color:var(--same)}
+.cd.now{color:var(--new)}.cd.soon{color:#D97706}.cd.done{color:var(--soft)}
+.more{display:block;margin:18px auto 0}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:600}
+.wish{margin-top:14px;padding:14px;border-radius:14px;background:rgba(245,158,11,.12);text-align:center;font-size:.88rem;line-height:1.55}
+</style>
 </head>
-
 <body>
+<canvas id="fx"></canvas>
+<a id="saweria-widget" href="https://saweria.co/damz93" target="_blank" rel="noopener"><img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" /> Recehan Kak 💖</a>
 
-    <canvas id="fireworksCanvas"></canvas>
+<div class="wrap wide">
+  <header class="hero"><div class="hero-in">
+    <a href="../pns-pemkot-mks-2024" title="Kembali ke Menu Utama"><img src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Logo Makassar" /></a>
+    <div><h1>KALENDER EVENT</h1><p>Agenda dan jadwal kegiatan PNS Pemerintah Kota Makassar</p></div>
+    <button class="theme-btn" data-theme-toggle title="Ganti tema" aria-label="Ganti tema"></button>
+  </div></header>
 
-    <div id="saweria-widget">
-        <a href="https://saweria.co/damz93" target="_blank">
-            <img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi">
-            <span>Recehan Kak 💖</span>
-        </a>
-    </div>
+  <main class="panel lift">
+    <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="q" type="search" autocomplete="off" placeholder="Cari agenda atau event..." /></div>
+    <div class="chips" id="chips"></div>
+    <div id="state" class="state"><div class="spin"></div>Memuat agenda...</div>
+    <div class="evs" id="list"></div>
+    <button class="btn no more" id="more" hidden>Muat lebih banyak</button>
+  </main>
+</div>
 
-    <div class="container main-container animate__animated animate__fadeIn">
-        
-        <div class="header-area">
-            <div class="logo-box">
-                <a href="../pns-pemkot-mks-2024" class="no-style">
-                    <img title="Kembali ke Menu Utama" src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Makassar Logo">
-                </a>
-            </div>
-            <div class="title-box">
-                <h2>KALENDER EVENT KEGIATAN</h2>
-                <p>Agenda dan Jadwal Kegiatan PNS Pemerintah Kota Makassar</p>
-            </div>
-        </div>
+<dialog id="dlg">
+  <span class="pill" id="dSt"></span>
+  <h2 id="dT" style="margin-top:10px"></h2>
+  <div id="dMeta" style="font-size:.82rem;font-weight:600;color:var(--soft);margin-bottom:12px"></div>
+  <div id="dD" style="font-size:.9rem;line-height:1.6"></div>
+  <div id="dW" class="wish" hidden></div>
+  <div class="btns"><a class="btn ok" id="dWa" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Bagikan</a><button class="btn no" id="dX">Tutup</button></div>
+</dialog>
 
-        <input type="text" id="searchInput" class="form-control" placeholder="Ketik kata kunci untuk mencari agenda/event PNS...">
-        
-        <div id="eventList" class="mt-3 animate__animated animate__fadeIn">
-            </div>
-    </div>
+<script>
+(function () {
+  var URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSvEzh0Ps5yeM9uGO5vuubyRlI2ZQQXbBqIQ-r6pwWopnu3XkI5ajEvrK13cmLCa2UlfyJ4xrWMQDKs/pub?gid=1636637928&single=true&output=csv";
+  var $ = function (id) { return document.getElementById(id); }, P = PNS;
+  var BLN = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  var ST = { now: ['Berlangsung', 'st-now'], soon: ['Akan Datang', 'st-soon'], done: ['Selesai', 'st-done'] };
+  var all = [], S = { q: '', st: '', n: 12 }, wishes = null;
 
-    <div class="modal fade" id="eventModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered modal-md">
-            <div class="modal-content animate__animated animate__fadeInUpFast">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Detail Agenda Kegiatan</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="modalDescription" class="mb-3"></p>
-                    <p id="modalTime" class="mb-0"></p>
-                </div>
-            </div>
-        </div>
-    </div>
+  function parse(s) {
+    var p = String(s).split(/[\s\/:]+/).map(Number);
+    return p.length < 3 || isNaN(p[2]) ? null : new Date(p[2], p[1] - 1, p[0], p[3] || 0, p[4] || 0, p[5] || 0);
+  }
+  function ymd(d) { return d.getFullYear() * 400 + d.getMonth() * 32 + d.getDate(); }
+  function status(d) { var n = new Date(), a = ymd(d), b = ymd(n); return a === b ? 'now' : d > n ? 'soon' : 'done'; }
+  function tgl(d) { return d.getDate() + ' ' + BLN[d.getMonth()] + ' ' + d.getFullYear(); }
 
-    <script src="event/script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  function loadWishes() {
+    return wishes ? Promise.resolve(wishes) : fetch('json/ucapan.json').then(function (r) { return r.json(); })
+      .catch(function () { return ['Selamat ulang tahun! Semoga sehat, sukses, dan penuh berkah.']; }).then(function (w) { return (wishes = w); });
+  }
+  function wish(w) { return w[Math.floor(Math.random() * w.length)]; }
+  function shareUrl(e, w) {
+    var t = '*[CPNS Makassar]*\n\n*' + e.nama + '*\n\n📅 ' + tgl(e.d) + '\n📝 ' + e.desc.replace(/<[^>]*>/g, '') + (w ? '\n\n*Ucapan Spesial:*\n"' + w + '"' : '') + '\n\n🔗 ' + location.href;
+    return 'https://wa.me/?text=' + encodeURIComponent(t);
+  }
+
+  fetch(URL).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (txt) {
+    all = P.csv(txt).slice(1).map(function (r) {
+      var d = parse(r[2] || ''); if (!d) return null;
+      var nama = (r[3] || '').trim(), desc = (r[4] || '').trim();
+      return { d: d, nama: nama, desc: desc, bday: /ulang tahun/i.test(nama), k: (nama + ' ' + desc).toLowerCase() };
+    }).filter(function (e) { return e && e.nama; });
+    all.forEach(function (e) { e.s = status(e.d); });
+    // urutan: berlangsung, akan datang (terdekat dulu), selesai (terbaru dulu)
+    var rank = { now: 0, soon: 1, done: 2 };
+    all.sort(function (a, b) { return rank[a.s] - rank[b.s] || (a.s === 'done' ? b.d - a.d : a.d - b.d); });
+    var c = { now: 0, soon: 0, done: 0 }; all.forEach(function (e) { c[e.s]++; });
+    $('chips').innerHTML = '<button class="chip on" data-s="">Semua (' + all.length + ')</button>' +
+      ['now', 'soon', 'done'].map(function (k) { return '<button class="chip" data-s="' + k + '">' + ST[k][0] + ' (' + c[k] + ')</button>'; }).join('');
+    $('state').hidden = true; render();
+    if (c.now) fireworks();
+  }).catch(function () { $('state').innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#F59E0B"></i><br><br>Agenda gagal dimuat. Muat ulang halaman.'; });
+
+  function render() {
+    var out = all.filter(function (e) { return (!S.st || e.s === S.st) && (!S.q || e.k.indexOf(S.q) > -1); });
+    var show = out.slice(0, S.n);
+    $('list').innerHTML = show.length ? show.map(function (e) {
+      var i = all.indexOf(e);
+      return '<article class="ev' + (e.bday ? ' bday' : '') + '" data-i="' + i + '"><span class="pill ' + ST[e.s][1] + '" style="align-self:flex-start">' + ST[e.s][0] + '</span>' +
+        '<a class="wa" href="' + shareUrl(e) + '" target="_blank" rel="noopener" title="Bagikan ke WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>' +
+        '<h3>' + (e.bday ? '<i class="fa-solid fa-cake-candles" style="color:#F59E0B"></i> ' : '') + P.esc(e.nama) + '</h3>' +
+        '<p>' + P.esc(e.desc.replace(/<[^>]*>/g, '').slice(0, 90)) + (e.desc.length > 90 ? '…' : '') + '</p>' +
+        '<div class="meta"><i class="fa-regular fa-calendar"></i> ' + tgl(e.d) + '</div><div class="cd" data-i="' + i + '"></div></article>';
+    }).join('') : '<div class="state" style="grid-column:1/-1">Tidak ada agenda ditemukan.</div>';
+    $('more').hidden = out.length <= S.n; tick();
+  }
+  function tick() {
+    var n = new Date();
+    document.querySelectorAll('.cd').forEach(function (el) {
+      var e = all[el.dataset.i], s = status(e.d), df = e.d - n;
+      if (s === 'now') { el.className = 'cd now'; el.textContent = 'Berlangsung hari ini'; }
+      else if (df > 0) { el.className = 'cd soon'; el.textContent = Math.floor(df / 864e5) + 'h ' + Math.floor(df % 864e5 / 36e5) + 'j ' + Math.floor(df % 36e5 / 6e4) + 'm ' + Math.floor(df % 6e4 / 1e3) + 'd lagi'; }
+      else { el.className = 'cd done'; el.textContent = 'Selesai ' + Math.max(1, Math.floor((ymd2(n) - ymd2(e.d)) / 864e5)) + ' hari lalu'; }
+    });
+  }
+  function ymd2(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime(); }
+  setInterval(tick, 1000);
+
+  /* interaksi */
+  var tm; $('q').addEventListener('input', function () { clearTimeout(tm); var v = this.value; tm = setTimeout(function () { S.q = v.toLowerCase().trim(); S.n = 12; render(); }, 120); });
+  $('chips').addEventListener('click', function (e) {
+    var b = e.target.closest('.chip'); if (!b) return;
+    this.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on'); }); b.classList.add('on'); S.st = b.dataset.s; S.n = 12; render();
+  });
+  $('more').onclick = function () { S.n += 12; render(); };
+  $('list').addEventListener('click', function (ev) {
+    if (ev.target.closest('.wa')) return;
+    var a = ev.target.closest('.ev'); if (!a) return; var e = all[a.dataset.i];
+    $('dSt').className = 'pill ' + ST[e.s][1]; $('dSt').textContent = ST[e.s][0];
+    $('dT').textContent = e.nama; $('dMeta').innerHTML = '<i class="fa-regular fa-calendar"></i> ' + P.esc(tgl(e.d)) + ' · ' + P.esc(e.d.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }));
+    $('dD').innerHTML = P.clean(e.desc) || '<span style="color:var(--soft)">Tanpa deskripsi.</span>';
+    $('dW').hidden = true; $('dWa').href = shareUrl(e); $('dlg').showModal();
+    if (e.bday) loadWishes().then(function (w) { var t = wish(w); $('dW').innerHTML = '<strong><i class="fa-solid fa-gift"></i> Ucapan Spesial</strong><br><em>"' + P.esc(t) + '"</em>'; $('dW').hidden = false; $('dWa').href = shareUrl(e, t); });
+  });
+  $('dX').onclick = function () { $('dlg').close(); };
+  $('dlg').addEventListener('click', function (e) { if (e.target === this) this.close(); });
+
+  /* kembang api singkat (sekali, 6 detik) bila ada event hari ini */
+  function fireworks() {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var c = $('fx'), x = c.getContext('2d'), ps = [], t0 = Date.now();
+    c.width = innerWidth; c.height = innerHeight;
+    var iv = setInterval(function () {
+      var cx = Math.random() * c.width, cy = Math.random() * c.height * .6, h = Math.random() * 360;
+      for (var i = 0; i < 24; i++) { var a = Math.PI * 2 * i / 24, v = 1.5 + Math.random() * 2.5; ps.push({ x: cx, y: cy, vx: Math.cos(a) * v, vy: Math.sin(a) * v, a: 1, c: 'hsl(' + h + ',100%,60%)' }); }
+    }, 700);
+    (function loop() {
+      x.clearRect(0, 0, c.width, c.height);
+      ps = ps.filter(function (p) { p.x += p.vx; p.y += p.vy; p.vy += .03; p.a -= .015; x.globalAlpha = Math.max(p.a, 0); x.fillStyle = p.c; x.beginPath(); x.arc(p.x, p.y, 2.5, 0, 6.3); x.fill(); return p.a > 0; });
+      if (Date.now() - t0 < 6000 || ps.length) requestAnimationFrame(loop); else { clearInterval(iv); x.clearRect(0, 0, c.width, c.height); }
+      if (Date.now() - t0 >= 6000) clearInterval(iv);
+    })();
+  }
+})();
+</script>
 </body>
 </html>

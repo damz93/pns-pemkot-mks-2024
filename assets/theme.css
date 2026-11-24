@@ -99,3 +99,43 @@ dialog li{margin-bottom:7px}
 @keyframes blink{50%{opacity:0}}
 @media(max-width:600px){.wrap{padding:12px}.hero{padding:22px 20px 84px}.hero img{height:54px}.hero.center img{height:76px}.panel{padding:14px}.lift{margin:-56px 8px 0}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== NAVIGASI: sidebar (PC) / floating bar (HP & tablet) ===== */
+.snav{position:fixed;z-index:700}
+.snav a{color:inherit}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.brand a{display:flex;align-items:center;gap:10px;min-width:0}
+.brand img{height:38px}
+.brand b{display:block;font-size:.95rem;font-weight:800}
+.brand small{color:var(--soft);font-size:.72rem;font-weight:600}
+.tg{width:34px;height:34px;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--soft);cursor:pointer}
+.tg:hover{color:var(--p);border-color:var(--p)}
+.links a{display:flex;align-items:center;color:var(--soft);font-weight:600;transition:.15s}
+.links a:hover{color:var(--text)}
+.links a.on{background:var(--grad);color:#fff}
+
+@media(min-width:1024px){
+  body{padding-left:248px}
+  .snav{left:0;top:0;bottom:0;width:248px;padding:20px 14px 80px;background:var(--card);border-right:1px solid var(--border)}
+  .brand{padding:4px 6px 18px;margin-bottom:12px;border-bottom:1px solid var(--border)}
+  .links{display:flex;flex-direction:column;gap:4px}
+  .links a{gap:12px;padding:12px 14px;border-radius:12px;font-size:.9rem}
+  .links a i{width:20px;text-align:center}
+  .links a:hover{background:var(--card2)}
+  .links a.on{box-shadow:0 6px 14px -6px rgba(37,99,235,.6)}
+  .ticker{left:248px}
+  #saweria-widget,.has-ticker #saweria-widget{left:14px;bottom:14px;width:220px}
+}
+@media(max-width:1023px){
+  body{padding-bottom:120px!important}
+  .snav{left:50%;transform:translateX(-50%);bottom:14px;width:min(540px,calc(100% - 24px));padding:7px;border-radius:24px;background:color-mix(in srgb,var(--card) 86%,transparent);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--border);box-shadow:0 14px 34px -10px rgba(15,23,42,.45)}
+  .brand{display:none}
+  .links{display:flex;width:100%;gap:2px}
+  .links a{flex:1;flex-direction:column;justify-content:center;gap:4px;padding:9px 2px;border-radius:18px;font-size:.66rem;font-weight:700}
+  .links a i{font-size:1.1rem}
+  .links a.on{box-shadow:0 6px 14px -6px rgba(37,99,235,.7)}
+  .ticker{bottom:84px;left:12px;right:12px;height:40px;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow)}
+  .ticker .tag{border-radius:13px 0 0 13px}
+  #saweria-widget{left:auto;right:12px;bottom:92px;padding:6px;font-size:0;gap:0}
+  .has-ticker #saweria-widget{bottom:136px}
+}

@@ -8,13 +8,27 @@
       b.innerHTML = '<i class="fa-solid fa-' + (d.dataset.theme === 'dark' ? 'sun' : 'moon') + '"></i>';
     });
   }
+  var NAV = [['index','Beranda','fa-house'],['data','Daftar PNS','fa-id-card-clip'],['summary','Summary','fa-chart-pie'],['event','Kalender','fa-calendar-check'],['faq','FAQ','fa-comments'],['istilah','Istilah','fa-spell-check']];
+  var LOGO = 'https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png';
+  function buildNav() {
+    var cur = (location.pathname.split('/').pop() || 'index').replace(/\.html$/, '') || 'index';
+    var links = NAV.map(function (n) {
+      var on = n[0] === cur;
+      return '<a href="' + n[0] + '.html"' + (on ? ' class="on" aria-current="page"' : '') + '><i class="fa-solid ' + n[2] + '"></i><span>' + n[1] + '</span></a>';
+    }).join('');
+    document.body.insertAdjacentHTML('beforeend',
+      '<nav class="snav" aria-label="Menu utama"><div class="brand"><a href="index.html"><img src="' + LOGO + '" alt="" /><span><b>PNS Mks 2024</b><small>Pemkot Makassar</small></span></a>' +
+      '<button class="tg" data-theme-toggle title="Ganti tema" aria-label="Ganti tema"></button></div><div class="links">' + links + '</div></nav>');
+  }
   document.addEventListener('DOMContentLoaded', function () {
+    buildNav();
     paint();
     document.querySelectorAll('[data-theme-toggle]').forEach(function (b) {
       b.onclick = function () {
         d.dataset.theme = d.dataset.theme === 'dark' ? 'light' : 'dark';
         try { localStorage.setItem(K, d.dataset.theme); } catch (e) {}
         paint();
+        document.dispatchEvent(new Event('themechange'));
       };
     });
   });

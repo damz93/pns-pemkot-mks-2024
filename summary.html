@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<title>Summary PNS | PNS Pemkot Makassar 2024 | by Dedy A Muzawwir</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" type="image/png" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<link rel="stylesheet" href="assets/theme.css" />
+<script src="assets/theme.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;position:relative;z-index:2;margin:-58px 22px 18px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px 18px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow)}
+.kpi i{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;color:#fff;font-size:1.1rem;flex:none}
+.kpi b{display:block;font-size:1.6rem;font-weight:800;line-height:1.1}
+.kpi span{font-size:.72rem;color:var(--soft);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.card h2{margin:0;font-size:1rem;font-weight:800}
+.card .sub{margin:3px 0 14px;color:var(--soft);font-size:.8rem;font-weight:500}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.cv{position:relative;height:260px}
+.empty{height:260px;display:grid;place-content:center;text-align:center;color:var(--soft);font-size:.86rem;line-height:1.6;padding:0 10px}
+.empty i{font-size:2rem;color:#F59E0B;margin-bottom:8px}
+.empty code{background:var(--card2);border:1px solid var(--border);padding:1px 6px;border-radius:6px;color:var(--text)}
+.full{margin-bottom:16px}
+.flows{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
+.flows li{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:600;background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:8px 12px}
+.flows li span{flex:1;min-width:0}.flows li b{color:var(--new)}.flows i{color:var(--soft);font-size:.7rem}
+.mini{display:flex;gap:6px}.mini .chip{padding:5px 11px;font-size:.74rem}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr);margin:-58px 10px 16px}.g2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a id="saweria-widget" href="https://saweria.co/damz93" target="_blank" rel="noopener"><img src="https://www.pngplay.com/wp-content/uploads/12/Killua-Zoldyck-Transparent-Image.png" alt="Donasi" /> Dukung Pengembang</a>
+
+<div class="wrap wide">
+  <header class="hero"><div class="hero-in">
+    <a href="../pns-pemkot-mks-2024" title="Kembali ke Menu Utama"><img src="https://makassarkota.go.id/wp-content/uploads/2024/02/logo-makassarkota-817x1024.png" alt="Logo Makassar" /></a>
+    <div><h1>SUMMARY DATA PNS</h1><p>Rekap kampus, satuan kerja, perpindahan, dan jenis kelamin</p></div>
+    <button class="theme-btn" data-theme-toggle title="Ganti tema" aria-label="Ganti tema"></button>
+  </div></header>
+
+  <section class="kpis">
+    <div class="kpi"><i style="background:linear-gradient(135deg,#3B82F6,#2563EB)" class="fa-solid fa-users"></i><div><b id="kTot">–</b><span>Total PNS</span></div></div>
+    <div class="kpi"><i style="background:linear-gradient(135deg,#8B5CF6,#7C3AED)" class="fa-solid fa-building"></i><div><b id="kUnit">–</b><span>Satuan Kerja</span></div></div>
+    <div class="kpi"><i style="background:linear-gradient(135deg,#F59E0B,#D97706)" class="fa-solid fa-graduation-cap"></i><div><b id="kCam">–</b><span>Kampus</span></div></div>
+    <div class="kpi"><i style="background:linear-gradient(135deg,#10B981,#059669)" class="fa-solid fa-right-left"></i><div><b id="kMov">–</b><span>Pindah Satker</span></div></div>
+  </section>
+
+  <div id="state" class="state"><div class="spin"></div>Memuat data...</div>
+  <div id="app" hidden>
+    <div class="g2">
+      <section class="panel card"><h2>Rekap Perpindahan</h2><p class="sub" id="movSub"></p><div class="cv"><canvas id="cMov"></canvas></div><ul class="flows" id="flows"></ul></section>
+      <section class="panel card"><h2>Rekap Jenis Kelamin</h2><p class="sub" id="genSub"></p><div class="cv" id="genBox"><canvas id="cGen"></canvas></div></section>
+    </div>
+
+    <section class="panel card full">
+      <div class="top"><div><h2>Rekap Kampus</h2><p class="sub" id="camSub"></p></div>
+        <div class="mini" data-for="cam"><button class="chip on" data-n="10">Top 10</button><button class="chip" data-n="0">Semua</button></div></div>
+      <div class="cv" id="camBox"><canvas id="cCam"></canvas></div>
+    </section>
+
+    <section class="panel card full">
+      <div class="top"><div><h2>Rekap Satuan Kerja</h2><p class="sub" id="unitSub"></p></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div class="mini" data-for="unitMode"><button class="chip on" data-m="baru">Terkini</button><button class="chip" data-m="lama">Sebelumnya</button></div>
+          <div class="mini" data-for="unit"><button class="chip on" data-n="10">Top 10</button><button class="chip" data-n="0">Semua</button></div>
+        </div></div>
+      <div class="cv" id="unitBox"><canvas id="cUnit"></canvas></div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); }, esc = PNS.esc;
+  var URL = "https://docs.google.com/spreadsheets/d/1pcwE1QG0zuQSgajTKFLqOjdHliTDxAwP0t11FkDR0XM/gviz/tq?tqx=out:json";
+  var PAL = ['#3B82F6','#8B5CF6','#10B981','#F59E0B','#EC4899','#06B6D4','#EF4444','#84CC16','#6366F1','#14B8A6','#F97316','#A855F7'];
+  var D = null, charts = {}, S = { cam: 10, unit: 10, unitMode: 'baru' };
+  var norm = function (s) { return s.toLowerCase().replace(/\s+/g, ' ').trim(); };
+
+  fetch(URL).then(function (r) { if (!r.ok) throw 0; return r.text(); }).then(function (t) {
+    var m = t.match(/google\.visualization\.Query\.setResponse\((.*)\);/); if (!m) throw 0;
+    var j = JSON.parse(m[1]).table, lb = j.cols.map(function (c) { return (c.label || '').toLowerCase().trim(); });
+    var ix = function (re, fb) { var i = lb.findIndex(function (l) { return re.test(l); }); return i < 0 ? fb : i; };
+    var cLama = lb.indexOf('satuan kerja'); if (cLama < 0) cLama = 6;
+    var cBaru = ix(/satuan kerja baru/, 10), cKam = ix(/kampus/, 11), cJK = ix(/kelamin|gender|^jk$/, -1), cNama = ix(/^nama/, 2);
+    var v = function (r, i) { return i >= 0 && r.c[i] && r.c[i].v != null ? String(r.c[i].v).trim() : ''; };
+
+    var rows = j.rows.filter(function (r) { return r && r.c && v(r, cNama); }).map(function (r) {
+      var o = { lama: v(r, cLama), baru: v(r, cBaru), kampus: v(r, cKam), jk: v(r, cJK) };
+      o.isNew = !!o.baru && norm(o.baru) !== norm(o.lama); o.unit = o.baru || o.lama;
+      var g = o.jk.toLowerCase();
+      o.g = !g ? '' : /^(l\b|laki|pria|male|m\b)/.test(g) ? 'Laki-laki' : /^(p\b|perempuan|wanita|female|f\b)/.test(g) ? 'Perempuan' : 'Lainnya';
+      return o;
+    });
+    D = { rows: rows, hasJK: cJK >= 0 };
+    $('state').hidden = true; $('app').hidden = false; fill(); draw();
+  }).catch(function () { $('state').innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="font-size:2rem;color:#F59E0B"></i><br><br>Data gagal dimuat. Pastikan sheet dibagikan "Anyone with the link".'; });
+
+  function count(arr, f) { var c = {}; arr.forEach(function (x) { var k = f(x); if (k) c[k] = (c[k] || 0) + 1; }); return Object.keys(c).map(function (k) { return [k, c[k]]; }).sort(function (a, b) { return b[1] - a[1] || a[0].localeCompare(b[0]); }); }
+  var nf = function (n) { return n.toLocaleString('id-ID'); };
+
+  function fill() {
+    var R = D.rows, mv = R.filter(function (r) { return r.isNew; }), n = R.length;
+    $('kTot').textContent = nf(n); $('kUnit').textContent = nf(count(R, function (r) { return r.unit; }).length);
+    $('kCam').textContent = nf(count(R, function (r) { return r.kampus; }).length); $('kMov').textContent = nf(mv.length);
+    $('movSub').textContent = mv.length + ' dari ' + n + ' PNS (' + (n ? (mv.length / n * 100).toFixed(1) : 0) + '%) berpindah satuan kerja';
+    var fl = count(mv, function (r) { return (r.lama || '?') + '→' + r.baru; }).slice(0, 5);
+    $('flows').innerHTML = fl.length ? fl.map(function (f) { var p = f[0].split('→'); return '<li><span>' + esc(p[0]) + '</span><i class="fa-solid fa-arrow-right"></i><span>' + esc(p[1]) + '</span><b>' + f[1] + '</b></li>'; }).join('') : '';
+    var gs = count(R, function (r) { return r.g; }), tot = gs.reduce(function (a, b) { return a + b[1]; }, 0);
+    $('genSub').textContent = D.hasJK && tot ? tot + ' dari ' + n + ' PNS sudah terisi jenis kelaminnya' : 'Menunggu kolom jenis kelamin';
+  }
+
+  function css(v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+  function mk(id, cfg) { if (charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
+  function donut(id, data, colors) {
+    mk(id, { type: 'doughnut', data: { labels: data.map(function (d) { return d[0]; }), datasets: [{ data: data.map(function (d) { return d[1]; }), backgroundColor: colors, borderColor: css('--card'), borderWidth: 3 }] },
+      options: { maintainAspectRatio: false, cutout: '66%', plugins: { legend: { position: 'bottom', labels: { color: css('--soft'), font: { family: 'Plus Jakarta Sans', weight: 600 }, usePointStyle: true } } } } });
+  }
+  function bar(id, boxId, data, limit, color) {
+    var d = limit ? data.slice(0, limit) : data;
+    $(boxId).style.height = Math.max(180, d.length * 30 + 50) + 'px';
+    mk(id, { type: 'bar', data: { labels: d.map(function (x) { return x[0]; }), datasets: [{ data: d.map(function (x) { return x[1]; }), backgroundColor: color, borderRadius: 6, barThickness: 18 }] },
+      options: { indexAxis: 'y', maintainAspectRatio: false, plugins: { legend: { display: false } },
+        scales: { x: { beginAtZero: true, ticks: { precision: 0, color: css('--soft') }, grid: { color: css('--border') } },
+                  y: { grid: { display: false }, ticks: { color: css('--text'), font: { family: 'Plus Jakarta Sans', weight: 600 }, callback: function (v) { var l = this.getLabelForValue(v); return l.length > 34 ? l.slice(0, 33) + '…' : l; } } } } } });
+  }
+
+  function draw() {
+    if (!D) return; var R = D.rows, nw = R.filter(function (r) { return r.isNew; }).length;
+    donut('cMov', [['Satuan kerja baru', nw], ['Tidak berubah', R.length - nw]], ['#10B981', '#94A3B8']);
+
+    var gs = count(R, function (r) { return r.g; });
+    if (!D.hasJK || !gs.length) {
+      $('genBox').innerHTML = '<div class="empty"><div><i class="fa-solid fa-circle-info"></i></div>' + (D.hasJK ? 'Kolom jenis kelamin sudah ada, tetapi belum terisi.' : 'Kolom jenis kelamin belum ada di sheet.') +
+        '<br>Tambahkan kolom berjudul <code>Jenis Kelamin</code> dengan isi <code>L</code> / <code>P</code> (atau Laki-laki / Perempuan). Grafik akan muncul otomatis.</div>';
+    } else {
+      if (!$('cGen')) $('genBox').innerHTML = '<canvas id="cGen"></canvas>';
+      var cm = { 'Laki-laki': '#3B82F6', 'Perempuan': '#EC4899', 'Lainnya': '#94A3B8' };
+      donut('cGen', gs, gs.map(function (g) { return cm[g[0]]; }));
+    }
+
+    var cam = count(R, function (r) { return r.kampus; });
+    $('camSub').textContent = cam.length + ' kampus · ' + nf(cam.reduce(function (a, b) { return a + b[1]; }, 0)) + ' PNS terdata';
+    bar('cCam', 'camBox', cam, S.cam, '#F59E0B');
+
+    var un = count(R, function (r) { return S.unitMode === 'baru' ? r.unit : r.lama; });
+    $('unitSub').textContent = un.length + ' satuan kerja (' + (S.unitMode === 'baru' ? 'sesuai penempatan terkini' : 'sebelum perpindahan') + ')';
+    bar('cUnit', 'unitBox', un, S.unit, '#6366F1');
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.mini .chip'); if (!b) return; var g = b.parentNode, f = g.dataset['for'];
+    g.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on'); }); b.classList.add('on');
+    if (f === 'unitMode') S.unitMode = b.dataset.m; else S[f] = +b.dataset.n; draw();
+  });
+  document.addEventListener('themechange', draw);
+})();
+</script>
+</body>
+</html>
